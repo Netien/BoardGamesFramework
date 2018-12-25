@@ -17,14 +17,15 @@
 
 class Piece{
 
-    private :
-    Joueur & m_joueur;
+private :
+    Joueur & m_joueur; //Une piece a toujours un joeur associé (donc référence)
     int m_coordX;
     int m_coordY;
     std::string m_type;
     
-    public :
+public :
     Piece(int coordX, int coordY, std::string type, Joueur & j);
+    virtual void promotion();
 };
 
 #endif /* Piece_hpp */

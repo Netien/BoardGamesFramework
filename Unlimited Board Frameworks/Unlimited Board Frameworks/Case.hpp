@@ -19,16 +19,16 @@
 #endif /* Case_hpp */
 class Case
 {
-    
-    public :
-    
-    Case(int coordX, int coordY);
-    
-    private :
-    
-    Piece * m_piece;
+private :
+    Piece * m_piece; //Une case peut avoir une piece ou non (pointeur NULL dans ce cas)
     int m_coordX;
     int m_coordY;
-    std::string couleur;
+    std::string m_couleur;
+    
+public :
+    Case();
+    Case(int coordX, int coordY);
+    Case(int coordX, int coordY, std::string couleur);
+    void setCoord(int x, int y);
     
 };

@@ -17,17 +17,16 @@
 
 class Joueur
 {
-    private :
-    
+
+private :
     std::string m_nom;
     int m_score;
     int const m_id;
-    
-    public :
     static int id;
-
+public :
     
-    Joueur(std::string nom, int id);
+    Joueur(std::string nom);
+    
 };
 
 
