@@ -8,7 +8,7 @@
 
 #include "Piece.hpp"
 
-Piece::Piece(int coordX, int coordY, std::string type, Joueur & j) : m_coordX(coordX), m_coordY(coordY), m_type(type), m_joueur(j)
+Piece::Piece(int coordX, int coordY, int type, Joueur & j) : m_coordX(coordX), m_coordY(coordY), m_type(type), m_joueur(j)
 {
     
 }

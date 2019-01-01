@@ -19,13 +19,15 @@ class Piece{
 
 private :
     Joueur & m_joueur; //Une piece a toujours un joeur associé (donc référence)
-    int m_coordX;
-    int m_coordY;
-    std::string m_type;
-    
+    int m_coordX = -1;
+    int m_coordY = -1;
+    int m_type;
+    int id;
 public :
-    Piece(int coordX, int coordY, std::string type, Joueur & j);
-    virtual void promotion();
+    Piece(int type, int id, Joueur& j);
+    void promotion(int n_type){ m_type = n_type; };
+    int getId(){ return id; };
+    void move(int x, int y){ m_coordX = x ; m_coordY = y ; };
 };
 
 #endif /* Piece_hpp */

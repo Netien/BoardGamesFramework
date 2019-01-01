@@ -8,17 +8,17 @@
 
 #include "Case.hpp"
 
-Case::Case() : m_coordX(-1), m_coordY(-1), m_piece(NULL), m_couleur("")
+Case::Case() : m_coordX(-1), m_coordY(-1), m_piece(NULL), m_couleur(0)
 {
     
 }
 
-Case::Case(int coordX, int coordY) : m_coordX(coordX), m_coordY(coordY), m_piece(NULL), m_couleur("")
+Case::Case(int coordX, int coordY) : m_coordX(coordX), m_coordY(coordY), m_piece(NULL), m_couleur(0)
 {
     
 }
 
-Case::Case(int coordX, int coordY, std::string couleur) : m_coordX(coordX), m_coordY(coordY), m_piece(NULL), m_couleur(couleur)
+Case::Case(int coordX, int coordY, int couleur) : m_coordX(coordX), m_coordY(coordY), m_piece(NULL), m_couleur(couleur)
 {
     
 }
