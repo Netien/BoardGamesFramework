@@ -22,11 +22,10 @@ private :
     std::string m_nom;
     int m_score;
     int const m_id;
-    static int id;
+    
 public :
-    
-    Joueur(std::string nom);
-    
+  Joueur(std::string nom, int id);
+    int getId(){ return this->m_id; };
 };
 
 

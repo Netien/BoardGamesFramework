@@ -18,15 +18,20 @@
 class Piece{
 
 private :
-    Joueur & m_joueur; //Une piece a toujours un joeur associé (donc référence)
-    int m_coordX = -1;
-    int m_coordY = -1;
+    Joueur &m_joueur; //Une piece a toujours un joeur associé (donc référence)
+    int m_coordX;
+    int m_coordY;
     int m_type;
-    int id;
+    int p_id;
+    
 public :
-    Piece(int type, int id, Joueur& j);
+    Piece(int type, int id, Joueur &j);
     void promotion(int n_type){ m_type = n_type; };
-    int getId(){ return id; };
+    int getId(){ return p_id; };
+    int getX(){ return m_coordX; }
+    int getY(){ return m_coordY; }
+    Joueur getJoueur(){ return m_joueur; };
+    int getType(){ return m_type; };
     void move(int x, int y){ m_coordX = x ; m_coordY = y ; };
 };
 

@@ -8,8 +8,6 @@
 
 #include "Piece.hpp"
 
-Piece::Piece(int coordX, int coordY, int type, Joueur & j) : m_coordX(coordX), m_coordY(coordY), m_type(type), m_joueur(j)
-{
-    
-}
+Piece::Piece(int type, int id, Joueur &j) : m_joueur(j), m_coordX(-1),	m_coordY(-1), m_type(type), p_id(id)
+{}
 

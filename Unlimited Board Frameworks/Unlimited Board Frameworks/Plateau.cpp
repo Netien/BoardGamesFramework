@@ -8,28 +8,18 @@
 
 #include "Plateau.hpp"
 Plateau::Plateau(const int largeur, const int hauteur) : m_largeur(largeur), m_hauteur(hauteur) {
-    
-    m_damier = new Case * [hauteur];
-    
-    for(int i = 0; i < hauteur; ++i)
-    {
-        m_damier[i] = new Case[largeur];
+    int x = 0;
+    int y;
+    m_damier = std::vector<std::vector<Case>>(largeur);
+    while(x < largeur){
+    	m_damier[x] = std::vector<Case>(hauteur);
+    	y = 0;
+    	while(y < hauteur){
+    		m_damier[x][y] = Case(x, y);
+    		y++;
+    	}
+    	x++;
     }
-    for(int i = 0; i<hauteur; ++i)
-    {
-        for(int j = 0; j<largeur; j++)
-        {
-            m_damier[i][j].setCoord(i, j);
-        }
-    }
+    
 }
 
-Plateau::~Plateau()
-{
-    for(int i = 0; i < m_hauteur; ++i)
-    {
-        delete m_damier[i];
-    }
-    
-    delete m_damier;
-}

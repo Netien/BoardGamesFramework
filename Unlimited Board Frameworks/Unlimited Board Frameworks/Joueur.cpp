@@ -8,11 +8,5 @@
 
 #include "Joueur.hpp"
 
-
-int Joueur::id = 0;
-
-Joueur::Joueur(std::string nom) : m_nom(nom), m_score(0), m_id(id)
-{
-    id++;
-}
+Joueur::Joueur(std::string nom, int id) : m_nom(nom), m_score(0), m_id(id){}
 
