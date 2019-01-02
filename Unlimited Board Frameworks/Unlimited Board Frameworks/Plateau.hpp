@@ -22,7 +22,6 @@ private :
     std::vector<Piece> m_listePieces;
 public :
     Plateau(int largeur, int hauteur);
-    virtual void remplirPlateau();
     Case getCase(int x, int y){ return m_damier[x][y]; };
     Piece getPiece(int p_id){ return m_listePieces[p_id]; };
     

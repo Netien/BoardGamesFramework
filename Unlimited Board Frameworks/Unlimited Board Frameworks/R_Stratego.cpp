@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <stdlib.h>
 #include <vector>
 #include "Regles.hpp"
 #include "Joueur.hpp"
@@ -8,7 +9,7 @@
 
 class R_Stratego : public Regles{
 private:
-  Plateau &p;
+  Plateau *p;
   std::vector<std::vector<Case> > positions;
 
   bool count_Dif_Pos_Ok(Piece pi, Case c){
@@ -31,12 +32,11 @@ private:
       positions[id][idx] = positions[id][idx-1];
       idx--;
     }
-    positions[id][idx] = p.getCase(x, y);
+    positions[id][idx] = p->getCase(x, y);
   };
   
 public:
-
-  R_Stratego(Plateau &board){
+  R_Stratego(Plateau *board){
     p = board;
     positions = std::vector<std::vector<Case> >(80, std::vector<Case>(4, Case()) );
   };
@@ -81,7 +81,7 @@ public:
     if(x1 == x2 && y1 == y2)
       return 3;
     //Case de depart vide
-    c = p.getCase(x1, y1);
+    c = p->getCase(x1, y1);
     if(c.isEmpty())
       return 4;
     //Piece n'appartient pas au joueur courant
@@ -100,7 +100,7 @@ public:
     i = x2;
     j = y2;
     while(i != x1 || j != y1){
-      c = p.getCase(i, j);
+      c = p->getCase(i, j);
       //Case inutiliable
       if(c.getCouleur() == 1)
 	return 7;
@@ -126,29 +126,29 @@ public:
   };
 
   void move(int x1, int y1, int x2, int y2){
-    Piece p1 = p.getCase(x1, y1).getPiece();
+    Piece p1 = p->getCase(x1, y1).getPiece();
     int t1;
     int t2;
-    if(p.getCase(x2, y2).isEmpty()){
-      p.move(x1, y1, x2, y2);
+    if(p->getCase(x2, y2).isEmpty()){
+      p->move(x1, y1, x2, y2);
       recordMove(x2, y2, p1);
     }
     else{
-      Piece p2 = p.getCase(x2, y2).getPiece();
+      Piece p2 = p->getCase(x2, y2).getPiece();
       t1 = p1.getType();
       t2 = p2.getType();
       if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
-	p.discard(p2);
-	p.move(x1, y1, x2, y2);
+	p->discard(p2);
+	p->move(x1, y1, x2, y2);
         recordMove(x2, y2, p1);
       }
       else if(t2 > t1){
-	p.discard(p1);
-	p.move(x2, y2, x1, y1);
+	p->discard(p1);
+	p->move(x2, y2, x1, y1);
       }
       else{
-	p.discard(p1);
-	p.discard(p2);
+	p->discard(p1);
+	p->discard(p2);
       }
     }
   };
@@ -160,7 +160,7 @@ public:
     bool rCanPlay = false;
     int idx = 0;
     while(idx < 80 && !rFlag && !bFlag && !bCanPlay && !rCanPlay){
-      Piece pi = p.getPiece(idx);
+      Piece pi = p->getPiece(idx);
       if(pi.getType() == 0){
 	if(pi.getJoueur().getId() == 0)
 	  bFlag = true;
@@ -184,6 +184,15 @@ public:
     
     return idx;
   };
+
+  bool placePiece(Piece &pi, int x, int y){
+    if(x < 0 || y < 0 || x > 9 || y > 9)
+      return false;
+    if(!(p->getCase(x, y).isEmpty()) )
+      return false;
+    p->dispatch(pi, x, y);
+    return true;
+  }
   
 };
 
