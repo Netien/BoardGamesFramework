@@ -15,8 +15,8 @@ class Regles
 {
 
 public :
-    virtual bool checkMove(int x1, int y1, int x2, int y2){ return false;};
-    virtual void move(int x1, int y1, int x2, int y2){};
+    virtual bool checkMove(int x1, int y1, int x2, int y2)=0;
+    virtual void move(int x1, int y1, int x2, int y2)=0;
     
 };
 #endif /* Regles_hpp */

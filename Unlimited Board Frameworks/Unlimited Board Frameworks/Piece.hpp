@@ -25,7 +25,7 @@ private :
     
 public :
     Piece(int coordX, int coordY, std::string type, Joueur & j);
-    virtual void promotion();
+    virtual void promotion()=0;
 };
 
 #endif /* Piece_hpp */

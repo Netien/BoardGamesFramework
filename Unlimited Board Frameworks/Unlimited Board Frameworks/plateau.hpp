@@ -21,8 +21,8 @@ private :
     std::vector<Piece> m_listePieces;
 public :
     Plateau(int largeur, int hauteur);
-    ~Plateau();
-    virtual void remplirPlateau();
+    virtual ~Plateau();
+    virtual void remplirPlateau()=0;
     
     friend class Regles;
     
