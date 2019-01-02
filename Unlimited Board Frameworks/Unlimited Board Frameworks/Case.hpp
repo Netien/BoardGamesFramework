@@ -27,22 +27,17 @@ public :
     Case(int coordX, int coordY);
     Case(int coordX, int coordY, int couleur);
     
-    Piece getPiece() { return *m_piece; };
-    int getCouleur() { return m_couleur; };
-    int getX(){ return m_coordX; };
-    int getY(){ return m_coordY; };
-    void setPiece(Piece *p){ m_piece = p; };
-    void setCouleur(int coul) { m_couleur = coul; };
-    bool isEmpty() { return m_piece == NULL; };
+    Piece getPiece();
+    int getCouleur();
+    int getX();
+    int getY();
+    void setPiece(Piece *p);
+    void setCouleur(int coul);
+	  void setCoord(int x, int y);
+    bool isEmpty();
     
-    bool operator==(const Case &c){
-    	bool eq = this->m_coordX == c.m_coordX;
-    	eq |= this->m_coordY == c.m_coordY;
-    	return eq;
-    };
-    bool operator!=(const Case &c){
-    	return !(this == &c);
-    }
+    bool operator==(const Case &c);
+    bool operator!=(const Case &c);
 };
 
 #endif /* Case_hpp */

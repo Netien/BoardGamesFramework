@@ -8,5 +8,8 @@
 
 #include "Joueur.hpp"
 
-Joueur::Joueur(std::string nom, int id) : m_nom(nom), m_score(0), m_id(id){}
+using namespace std;
 
+Joueur::Joueur(string nom, int id) : m_nom(nom), m_score(0), m_id(id){}
+
+int Joueur::getId(){ return m_id; }

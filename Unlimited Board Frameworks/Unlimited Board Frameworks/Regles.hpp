@@ -11,18 +11,14 @@
 
 #include <stdio.h>
 #include "Plateau.hpp"
+#include "Piece.hpp"
 
 class Regles
 {
-private:
-  Plateau *p;
-
 public :
-  virtual bool checkMove(int x1, int y1, int x2, int y2){ return false; };
-  virtual void move(int x1, int y1, int x2, int y2){};
-  virtual int etatPartie(){ return 0; };
-  virtual bool placePiece(Piece &piece, int x, int y){ return false; };
-  
-  Regles(Plateau *board);
+  virtual int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour) = 0;
+  virtual void move(Plateau &p, int x1, int y1, int x2, int y2) = 0;
+  virtual int etatPartie(Plateau &p) = 0;
+  virtual bool placePiece(Plateau &p, Piece *piece, int x, int y) = 0;
 };
 #endif /* Regles_hpp */
