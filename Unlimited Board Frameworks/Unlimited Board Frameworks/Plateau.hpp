@@ -14,14 +14,14 @@
 #include "Piece.hpp"
 
 class Plateau {
-    
 private :
     int m_largeur;
     int m_hauteur;
-    std::vector<std::vector<Case>> m_damier;
+    Case **m_damier;
     std::vector<Piece> m_listePieces;
 public :
     Plateau(int largeur, int hauteur);
+    virtual ~Plateau();
     Case getCase(int x, int y);
     Piece getPiece(int p_id);
     

@@ -11,23 +11,31 @@
 using namespace std;
 
 Plateau::Plateau(const int largeur, const int hauteur) : m_largeur(largeur), m_hauteur(hauteur) {
-    int x = 0;
-    int y = 0;
-    m_damier = vector<vector<Case> >(largeur);
-    while(x < largeur){
-    	m_damier.at(x) = std::vector<Case>(hauteur);
-    	y = 0;
-    	while(y < hauteur){
-    		m_damier.at(x).at(y).setCoord(x, y);
-    		y++;
-    	}
-    	x++;
-    }   
+    m_damier = new Case* [hauteur];
+    for(int i = 0; i < hauteur; ++i)
+    {
+        m_damier[i] = new Case[largeur];
+    }
+    for(int i = 0; i<hauteur; ++i)
+    {
+        for(int j = 0; j<largeur; j++)
+        {
+            m_damier[i][j].setCoord(i, j);
+        }
+    }
 }
 
-Case Plateau::getCase(int x, int y){ return m_damier.at(x).at(y); };
+Plateau::~Plateau(){
+    for(int i = 0; i < m_hauteur; ++i)
+    {
+        delete m_damier[i];
+    }
+    delete m_damier;
+}
 
-Piece Plateau::getPiece(int p_id){ return m_listePieces.at(p_id); }
+Case Plateau::getCase(int x, int y){ return m_damier[x][y]; };
+
+Piece Plateau::getPiece(int p_id){ return m_listePieces[p_id]; }
 
 void Plateau::move(int x1, int y1, int x2, int y2){
     Piece p = getCase(x1, y1).getPiece();
