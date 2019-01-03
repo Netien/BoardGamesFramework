@@ -10,8 +10,9 @@
 #define Plateau_De_Stratego_hpp
 
 #include "Jeu.hpp"
+#include "Affichage_Partiel.hpp"
 
-class Plateau_De_Stratego : public Plateau{
+class Plateau_De_Stratego : public Plateau, public Affichage_Partiel{
     
     public :
     Plateau_De_Stratego();

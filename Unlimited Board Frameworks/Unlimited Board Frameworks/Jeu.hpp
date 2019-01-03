@@ -8,7 +8,7 @@
 
 #ifndef Jeu_hpp
 #define Jeu_hpp
-#include "R_Stratego.hpp"
+#include "Regles.hpp"
 #include "Joueur.hpp"
 #include "Plateau.hpp"
 #include "Case.hpp"
