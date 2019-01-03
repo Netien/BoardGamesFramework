@@ -13,6 +13,7 @@
 #include "Plateau.hpp"
 #include "Case.hpp"
 #include "Piece.hpp"
+#include "Affichage.hpp"
 #include <stdio.h>
 
 class Jeu{
@@ -21,10 +22,12 @@ protected :
     Plateau & m_plateau;
     Regles &  m_regles;
     vector<Joueur> & m_listJoueurs;
+    Affichage & m_affichage;
+    
     
 public :
     virtual void start()=0;
-    Jeu(Plateau & p, Regles & r, vector<Joueur> & listJoueurs);
+    Jeu(Plateau & p, Regles & r, vector<Joueur> & listJoueurs, Affichage & a);
     
     
 };
