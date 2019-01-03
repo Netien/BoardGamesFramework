@@ -11,8 +11,8 @@
 
 Plateau_De_Stratego::Plateau_De_Stratego() : Plateau(10, 10)
 {
-    for(int y = 4; y < 6; y++) {
-        
+    for(int y = 4; y < 6; y++)
+    {
         for( int x = 2; x < 4; x++)
         {
             getCase(x, y).setCouleur(1);

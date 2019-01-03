@@ -12,13 +12,13 @@ using namespace std;
 
 Plateau::Plateau(const int largeur, const int hauteur) : m_largeur(largeur), m_hauteur(hauteur) {
     m_damier = new Case* [hauteur];
-    for(int i = 0; i < hauteur; ++i)
+    for(int i = 0; i < largeur; ++i)
     {
-        m_damier[i] = new Case[largeur];
+        m_damier[i] = new Case[hauteur];
     }
-    for(int i = 0; i<hauteur; ++i)
+    for(int i = 0; i<largeur; ++i)
     {
-        for(int j = 0; j<largeur; j++)
+        for(int j = 0; j<hauteur; j++)
         {
             m_damier[i][j].setCoord(i, j);
         }
