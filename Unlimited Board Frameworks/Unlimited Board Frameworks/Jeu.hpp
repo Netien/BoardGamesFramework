@@ -14,17 +14,18 @@
 #include "Case.hpp"
 #include "Piece.hpp"
 #include <stdio.h>
+#include <vector>
 
 class Jeu{
     
 protected :
     Plateau & m_plateau;
     Regles &  m_regles;
-    vector<Joueur> & m_listJoueurs;
+    std::vector<Joueur> & m_listJoueurs;
     
 public :
     virtual void start()=0;
-    Jeu(Plateau & p, Regles & r, vector<Joueur> & listJoueurs);
+    Jeu(Plateau & p, Regles & r, std::vector<Joueur> & listJoueurs);
     
     
 };

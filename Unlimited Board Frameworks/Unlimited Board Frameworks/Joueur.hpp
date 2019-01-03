@@ -15,16 +15,15 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 class Joueur{
 private :
-    string m_nom;
+    std::string m_nom;
     int m_score;
     int const m_id;
+    static int id;
     
 public :
-    Joueur(string nom, int id);
+    Joueur(std::string nom);
     int getId();
 };
 

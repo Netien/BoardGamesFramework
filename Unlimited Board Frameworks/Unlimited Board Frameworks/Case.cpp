@@ -34,11 +34,11 @@ void Case::setCoord(int x, int y) { m_coordX = x; m_coordY = y; }
 bool Case::isEmpty() { return m_piece == NULL; }
 
 bool Case::operator==(const Case &c){
-	bool eq = this->m_coordX == c.m_coordX;
-	eq |= this->m_coordY == c.m_coordY;
-	return eq;
+    bool eq = this->m_coordX == c.m_coordX;
+    eq |= this->m_coordY == c.m_coordY;
+    return eq;
 }
 
 bool Case::operator!=(const Case &c){
-	return !(this == &c);
+    return !(this == &c);
 }

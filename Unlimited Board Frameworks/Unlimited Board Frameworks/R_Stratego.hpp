@@ -22,13 +22,13 @@ class R_Stratego : public Regles
 private:
     vector<vector<Case> > positions;
     virtual bool count_Dif_Pos_Ok(Piece &piece, Case &c);
-    virtual void recordMove(Plateau_De_Stratego &plateau, Piece &piece, int x, int y);
+    virtual void recordMove(Plateau &plateau, Piece &piece, int x, int y);
   
 public :
     R_Stratego();
     virtual int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour);
     virtual void move(Plateau &p, int x1, int y1, int x2, int y2);
     virtual int etatPartie(Plateau &p);
-    virtual bool placePiece(Plateau &p, Piece *piece, int x, int y);
+    virtual bool placePiece(Plateau &p, Piece &piece, int x, int y);
 };
 #endif /* Regles_hpp */

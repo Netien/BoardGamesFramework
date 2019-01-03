@@ -8,8 +8,12 @@
 
 #include "Piece.hpp"
 
-Piece::Piece(int type, int id, Joueur &j) : m_joueur(j), m_coordX(-1),	m_coordY(-1), m_type(type), p_id(id)
-{}
+int Piece::id = 0;
+
+Piece::Piece(int type, Joueur &j) : m_joueur(j), m_coordX(-1),	m_coordY(-1), m_type(type), p_id(id)
+{
+    id++;
+}
 
 void Piece::promotion(int n_type){ m_type = n_type; };
 

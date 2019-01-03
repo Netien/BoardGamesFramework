@@ -22,7 +22,7 @@ bool R_Stratego::count_Dif_Pos_Ok(Piece &piece, Case &c){
     return true;
 };
 
-void R_Stratego::recordMove(Plateau_De_Stratego &plateau, Piece &piece, int x, int y){
+void R_Stratego::recordMove(Plateau &plateau, Piece &piece, int x, int y){
     int idx = 3;
     int id = piece.getId();
     while(idx > 0){
@@ -59,7 +59,7 @@ R_Stratego::R_Stratego() :
 /* Retourne 0 si le mouvement est valide.
  * Retourne une autre valeur si le mouvement est interdit.
  */
-int R_Stratego::checkMove(Plateau_De_Stratego &plateau, int x1, int y1, int x2, int y2, Joueur j_tour){
+int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joueur j_tour){
     Case c;
     int type_m;
     int i;
@@ -132,7 +132,7 @@ int R_Stratego::checkMove(Plateau_De_Stratego &plateau, int x1, int y1, int x2, 
     return 0;
 };
 
-void R_Stratego::move(Plateau_De_Stratego &plateau, int x1, int y1, int x2, int y2){
+void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     Piece p1 = plateau.getCase(x1, y1).getPiece();
     int t1;
     int t2;
@@ -159,7 +159,7 @@ void R_Stratego::move(Plateau_De_Stratego &plateau, int x1, int y1, int x2, int 
     }
 };
 
-int R_Stratego::etatPartie(Plateau_De_Stratego &plateau){
+int R_Stratego::etatPartie(Plateau &plateau){
     bool bFlag = false;
     bool rFlag = false;
     bool bCanPlay = false;
@@ -197,7 +197,7 @@ int R_Stratego::etatPartie(Plateau_De_Stratego &plateau){
     else return 0;
 }
 
-bool R_Stratego::placePiece(Plateau_De_Stratego &plateau, Piece &piece, int x, int y)
+bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 {
     if(not plateau.contains(x, y))
 	return false;
@@ -221,7 +221,7 @@ bool R_Stratego::placePiece(Plateau_De_Stratego &plateau, Piece &piece, int x, i
 	return false;
     
     plateau.dispatch(piece, x, y);
-    plateau.m_listePieces.push_back(piece);
+    plateau.addPiece(piece);
     
     return true;
 }

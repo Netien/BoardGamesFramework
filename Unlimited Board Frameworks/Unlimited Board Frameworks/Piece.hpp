@@ -22,9 +22,10 @@ private :
     int m_coordY;
     int m_type;
     int p_id;
+    static int id;
     
 public :
-    Piece(int type, int id, Joueur &j);
+    Piece(int type, Joueur &j);
     void promotion(int n_type);
     int getId();
     int getX();

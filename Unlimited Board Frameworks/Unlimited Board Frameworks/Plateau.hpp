@@ -26,13 +26,12 @@ public :
     Case getCase(int x, int y);
     Piece getPiece(int p_id);
     bool contains(int x, int y); //Vérifie si case est dans le plateau
-    void ajoutPiece(Piece p);
-    
 
     void move(int x1, int y1, int x2, int y2);
     void discard(Piece &p);
     void dispatch(Piece &p, int x, int y);
-    
+    void addPiece(Piece &piece);
+	
     friend class Regles;
 };
 
