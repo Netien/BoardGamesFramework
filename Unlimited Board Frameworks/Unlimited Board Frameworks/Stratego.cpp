@@ -9,4 +9,4 @@
 
 class Stratego : public Stratego {
   
-}
+};

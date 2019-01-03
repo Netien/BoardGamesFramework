@@ -33,7 +33,7 @@ public :
     int getY();
     void setPiece(Piece *p);
     void setCouleur(int coul);
-	  void setCoord(int x, int y);
+    void setCoord(int x, int y);
     bool isEmpty();
     
     bool operator==(const Case &c);

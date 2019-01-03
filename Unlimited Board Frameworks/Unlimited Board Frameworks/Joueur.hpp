@@ -24,7 +24,7 @@ private :
     int const m_id;
     
 public :
-	  Joueur(string nom, int id);
+    Joueur(string nom, int id);
     int getId();
 };
 
