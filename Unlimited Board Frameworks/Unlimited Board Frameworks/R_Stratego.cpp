@@ -6,6 +6,7 @@
 #include "Case.hpp"
 #include "Piece.hpp"
 
+
 using namespace std;
 
 bool R_Stratego::count_Dif_Pos_Ok(Piece &piece, Case &c){
@@ -21,7 +22,7 @@ bool R_Stratego::count_Dif_Pos_Ok(Piece &piece, Case &c){
   return true;
 };
 
-void R_Stratego::recordMove(Plateau &plateau, Piece &piece, int x, int y){
+void R_Stratego::recordMove(Plateau_De_Stratego &plateau, Piece &piece, int x, int y){
   int idx = 3;
   int id = piece.getId();
   while(idx > 0){
@@ -58,17 +59,22 @@ R_Stratego::R_Stratego() :
 /* Retourne 0 si le mouvement est valide.
  * Retourne une autre valeur si le mouvement est interdit.
  */
-int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joueur j_tour){
+int R_Stratego::checkMove(Plateau_De_Stratego &plateau, int x1, int y1, int x2, int y2, Joueur j_tour){
   Case c;
   int type_m;
   int i;
   int j;
   //Sortie du plateau
-  if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0)
+  if( not (plateau.contains(x1, y1))){
     return 1;
-  if(x1 > 9 || y1 > 9 || x2 > 9 || y2 > 9)
+  }
+
+  if ( not (plateau.contains(x2, y2))){
     return 1;
-  //Déplacement en diagonale
+  }
+    
+ 
+  //Déplacement non orthogonal
   if(x1 != x2 && y1 != y2)
     return 2;
   //Mouvement sur la meme case
@@ -101,12 +107,18 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
     //Case d'arrivée occupée par piece du joueur actif
     if(i == x2 && j == y2){
       if(!c.isEmpty())
-	if(j_tour.getId() == piece.getJoueur().getId())
-	  return 8;
+      {
+          if(j_tour.getId() == piece.getJoueur().getId())
+          {
+              return 8;
+          }
+      }
     }
     //Case intermediaire non-vide
-    if(!c.isEmpty())
+    if( not c.isEmpty())
       return 9;
+      
+    //incrémentation/décrémentation adaptée
     if(i > x1)
       i--;
     else if(i < x1)
@@ -119,7 +131,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
   return 0;
 };
 
-void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
+void R_Stratego::move(Plateau_De_Stratego &plateau, int x1, int y1, int x2, int y2){
   Piece p1 = plateau.getCase(x1, y1).getPiece();
   int t1;
   int t2;
@@ -138,7 +150,6 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     }
     else if(t2 > t1){
       plateau.discard(p1);
-      plateau.move(x2, y2, x1, y1);
     }
     else{
       plateau.discard(p1);
@@ -146,44 +157,70 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     }
   }
 };
-  
-int R_Stratego::etatPartie(Plateau &plateau){
+
+int R_Stratego::etatPartie(Plateau_De_Stratego &plateau){
   bool bFlag = false;
   bool rFlag = false;
   bool bCanPlay = false;
   bool rCanPlay = false;
   int idx = 0;
-  while(idx < 80 && !rFlag && !bFlag && !bCanPlay && !rCanPlay){
+  while(idx < 80 && not (rFlag && bFlag && bCanPlay && rCanPlay) ){
     Piece piece = plateau.getPiece(idx);
     if(piece.getType() == 0){
       if(piece.getJoueur().getId() == 0)
-	bFlag = true;
+          bFlag = true;
       else
-	rFlag = true;
-    }
-    if(piece.getType() != 11 && !rCanPlay && !bCanPlay){
-      if(piece.getJoueur().getId() == 0)
-	bCanPlay = true;
-      else
-	rCanPlay = true;
-    }
-    idx++;
+          rFlag = true;
+  }
+  else if(piece.getType() != 11 && not (rCanPlay && bCanPlay)){
+    if(piece.getJoueur().getId() == 0)
+      bCanPlay = true;
+    else
+      rCanPlay = true;
+  }
+  idx++;
   }
   
-  if(!bFlag) idx = 1;
-  else if(!rFlag) idx = 2;
-  else if(!bCanPlay) idx = 3;
-  else if(!rCanPlay) idx = 4;
-  else idx = 0;
     
-  return idx;
-};
+  //Si le bleu s'est fait capturer son drapeau (victoire des rouges).
+  if(!bFlag) return 1;
+  //Si le rouge s'est fait capturer son drapeau (victoire des bleu).
+  else if(!rFlag) return 2;
+  //Si le rouge ET le bleu ne peuvent jouer (égalité).
+  else if(!bCanPlay && !rCanPlay) return 3;
+  //Si le bleu ne peux plus jouer (victoire des rouges).
+  else if(!bCanPlay) return 4;
+  //Si le rouge ne peux plus jouer (victoire des bleu).
+  else if(!rCanPlay) return 5;
+  //Sinon
+  else return 0;
+}
 
-bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y){
-  if(x < 0 || y < 0 || x > 9 || y > 9)
+bool R_Stratego::placePiece(Plateau_De_Stratego &plateau, Piece &piece, int x, int y, Joueur j)
+{
+  if(not plateau.contains(x, y))
     return false;
-  if(!(plateau.getCase(x, y).isEmpty()) )
+    
+  if(j.getId() == 0)
+  {
+      if(y>=4){
+          return false;
+      }
+  }
+
+  if(j.getId() == 1)
+  {
+    if(y<=6){
+      return false;
+    }
+  }
+
+  
+  if( not (plateau.getCase(x, y).isEmpty()) )
     return false;
+    
   plateau.dispatch(piece, x, y);
+  plateau.m_listePieces.push_back(piece);
+    
   return true;
 }

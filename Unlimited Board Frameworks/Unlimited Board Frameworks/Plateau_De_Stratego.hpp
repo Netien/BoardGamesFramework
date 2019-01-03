@@ -15,6 +15,8 @@ class Plateau_De_Stratego : public Plateau{
     
     public :
     Plateau_De_Stratego();
+    
+    friend class R_Stratego;
 };
 
 

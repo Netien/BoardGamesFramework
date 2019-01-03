@@ -25,6 +25,17 @@ Plateau::Plateau(const int largeur, const int hauteur) : m_largeur(largeur), m_h
     }
 }
 
+bool Plateau::contains(int x, int y)
+{
+    if (x < 0 || x >= m_largeur)
+        return false;
+    
+    if (y<0 || y>=m_hauteur)
+        return false;
+    
+    return true;
+}
+
 Plateau::~Plateau(){
     for(int i = 0; i < m_hauteur; ++i)
     {

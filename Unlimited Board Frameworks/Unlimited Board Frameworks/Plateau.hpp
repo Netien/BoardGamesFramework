@@ -14,9 +14,10 @@
 #include "Piece.hpp"
 
 class Plateau {
-private :
-    int m_largeur;
-    int m_hauteur;
+    
+protected :
+    int const m_largeur;
+    int const m_hauteur;
     Case **m_damier;
     std::vector<Piece> m_listePieces;
 public :
@@ -24,7 +25,10 @@ public :
     virtual ~Plateau();
     Case getCase(int x, int y);
     Piece getPiece(int p_id);
+    bool contains(int x, int y); //Vérifie si case est dans le plateau
+    void ajoutPiece(Piece p);
     
+
     void move(int x1, int y1, int x2, int y2);
     void discard(Piece &p);
     void dispatch(Piece &p, int x, int y);
