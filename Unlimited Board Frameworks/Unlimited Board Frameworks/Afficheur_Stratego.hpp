@@ -11,12 +11,13 @@
 
 #include <stdio.h>
 #include "Affichage.hpp"
+#include "Plateau_De_Stratego.hpp"
 
 class Afficheur_Stratego : public Affichage
 {
 public :
-    void affichageTotal(Plateau p);
-    void affichagePartiel(Plateau p, Joueur j);
+    void affichageTotal(Plateau & p);
+    void affichagePartiel(Plateau & p, Joueur j);
 };
 
 

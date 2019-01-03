@@ -10,13 +10,14 @@
 #define Plateau_De_Stratego_hpp
 
 #include "Jeu.hpp"
-#include "Affichage_Partiel.hpp"
 
-class Plateau_De_Stratego : public Plateau, public Affichage_Partiel{
+
+class Plateau_De_Stratego : public Plateau{
+    
     
     public :
     Plateau_De_Stratego();
-    
+    void afficher();
     friend class R_Stratego;
 };
 

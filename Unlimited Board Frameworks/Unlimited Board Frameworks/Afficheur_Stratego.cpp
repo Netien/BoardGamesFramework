@@ -9,7 +9,7 @@
 #include "Afficheur_Stratego.hpp"
 
 
-void Afficheur_Stratego::affichageTotal(Plateau p)
+void Afficheur_Stratego::affichageTotal(Plateau & p)
 {
     for(int y = p.getHauteur()-1; y >= 0; y--)
     {
@@ -53,7 +53,7 @@ void Afficheur_Stratego::affichageTotal(Plateau p)
     }
 }
 
-void Afficheur_Stratego::affichagePartiel(Plateau p, Joueur j)
+void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
 {
     
 }

@@ -11,17 +11,19 @@
 using namespace std;
 
 Plateau::Plateau(const int largeur, const int hauteur) : m_largeur(largeur), m_hauteur(hauteur) {
-    m_damier = new Case* [hauteur];
-    for(int i = 0; i < largeur; ++i)
-    {
-        m_damier[i] = new Case[hauteur];
-    }
-    for(int i = 0; i<largeur; ++i)
-    {
-        for(int j = 0; j<hauteur; j++)
-        {
-            m_damier[i][j].setCoord(i, j);
+    
+    
+    int x = 0;
+    int y = 0;
+    m_damier = vector<vector<Case> >(largeur);
+    while(x < largeur){
+        m_damier.at(x) = std::vector<Case>(hauteur);
+        y = 0;
+        while(y < hauteur){
+            m_damier.at(x).at(y).setCoord(x, y);
+            y++;
         }
+        x++;
     }
 }
 
@@ -36,15 +38,17 @@ bool Plateau::contains(int x, int y)
     return true;
 }
 
-Plateau::~Plateau(){
-    for(int i = 0; i < m_hauteur; ++i)
-    {
-        delete m_damier[i];
-    }
-    delete m_damier;
+int Plateau::getHauteur()
+{
+    return m_hauteur;
 }
 
-Case Plateau::getCase(int x, int y){ return m_damier[x][y]; };
+int Plateau::getLargeur()
+{
+    return m_largeur;
+}
+
+Case & Plateau::getCase(int x, int y){ return m_damier[x][y]; };
 
 Piece Plateau::getPiece(int p_id){ return m_listePieces[p_id]; }
 
@@ -63,6 +67,11 @@ void Plateau::discard(Piece &p){
 void Plateau::dispatch(Piece &p, int x, int y){
 		getCase(x, y).setPiece(&p);
 		p.move(x, y);
+}
+
+void Plateau::ajoutPiece(Piece p)
+{
+    m_listePieces.push_back(p);
 }
 
 
