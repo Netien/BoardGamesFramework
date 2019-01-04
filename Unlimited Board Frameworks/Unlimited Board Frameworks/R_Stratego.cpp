@@ -197,19 +197,19 @@ int R_Stratego::etatPartie(Plateau &plateau){
     else return 0;
 }
 
-bool R_Stratego::placePiece(Plateau &plateau, Piece *piece, int x, int y)
+bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 {
     if(not plateau.contains(x, y))
 	return false;
     
-    if(piece->getJoueur().getId() == 0)
+    if(piece.getJoueur().getId() == 0)
     {
 	if(y>=4){
 	    return false;
 	}
     }
 
-    if(piece->getJoueur().getId() == 1)
+    if(piece.getJoueur().getId() == 1)
     {
 	if(y<=6){
 	    return false;
@@ -220,8 +220,8 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece *piece, int x, int y)
     if( not (plateau.getCase(x, y).isEmpty()) )
 	return false;
     
-    plateau.dispatch(*piece, x, y);
-    plateau.ajoutPiece(*piece);
+    plateau.dispatch(piece, x, y);
+    plateau.ajoutPiece(piece);
     
     return true;
 }

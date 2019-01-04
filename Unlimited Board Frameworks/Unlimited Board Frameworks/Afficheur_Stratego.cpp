@@ -8,6 +8,7 @@
 
 #include "Afficheur_Stratego.hpp"
 
+using namespace std;
 
 void Afficheur_Stratego::affichageTotal(Plateau & p)
 {
@@ -23,12 +24,12 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
             {
                 if(c.getCouleur()==0)
                 {
-                    std::cout << " " << "\u25A0" << " ";
+                    cout << " " << "\u25A0" << " ";
                 }
                 
                 if(c.getCouleur()==1)
                 {
-                    std::cout << " " << "\u25A1" << " ";
+                    cout << " " << "\u25A1" << " ";
                 }
             }
             else
@@ -37,20 +38,21 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
                 
                 if (type < 10)
                 {
-                    std::cout << " " << type << " ";
+                    cout << " " << type << " ";
                 }
                 else if (type == 10)
                 {
-                    std::cout << 'M' << type << " ";
+                    cout << 'M' << type << " ";
                 }
                 else
                 {
-                    std::cout << 'B' << type << " ";
+                    cout << 'B' << type << " ";
                 }
                 
             }
         }
     }
+    cout << endl;
 }
 
 void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)

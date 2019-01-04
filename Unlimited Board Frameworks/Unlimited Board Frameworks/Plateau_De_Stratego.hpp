@@ -11,11 +11,9 @@
 
 #include "Jeu.hpp"
 
-
 class Plateau_De_Stratego : public Plateau{
     
-    
-    public :
+public :
     Plateau_De_Stratego();
     void afficher();
     friend class R_Stratego;

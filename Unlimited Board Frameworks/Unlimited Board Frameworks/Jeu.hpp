@@ -15,22 +15,20 @@
 #include "Piece.hpp"
 #include "Affichage.hpp"
 #include <stdio.h>
+#include <vector>
 
 class Jeu{
     
 protected :
-    Plateau & m_plateau;
-    Regles &  m_regles;
-    vector<Joueur> & m_listJoueurs;
-    Affichage & m_affichage;
-    
+    Plateau &m_plateau;
+    Regles &m_regles;
+    std::vector<Joueur> &m_listJoueurs;
+    Affichage & m_affichage;    
     
 public :
     virtual void start()=0;
-    Jeu(Plateau & p, Regles & r, vector<Joueur> & listJoueurs, Affichage & a);
-    
+    Jeu(Plateau &p, Regles &r, std::vector<Joueur> &listJoueurs, Affichage &a);
     
 };
-
 
 #endif /* Jeu_hpp */

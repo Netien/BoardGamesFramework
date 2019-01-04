@@ -10,6 +10,11 @@
 
 using namespace std;
 
-Joueur::Joueur(string nom, int id) : m_nom(nom), m_score(0), m_id(id){}
+int Joueur::id = 0;
+
+Joueur::Joueur(string nom) : m_nom(nom), m_score(0), m_id(id)
+{
+    id++;
+}
 
 int Joueur::getId(){ return m_id; }

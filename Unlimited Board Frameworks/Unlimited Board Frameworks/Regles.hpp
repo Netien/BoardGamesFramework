@@ -1,3 +1,4 @@
+
 //
 //  Regles.hpp
 //  Unlimited Board Frameworks
@@ -16,9 +17,9 @@
 class Regles
 {
 public :
-  virtual int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour) = 0;
-  virtual void move(Plateau &p, int x1, int y1, int x2, int y2) = 0;
-  virtual int etatPartie(Plateau &p) = 0;
-  virtual bool placePiece(Plateau &p, Piece *piece, int x, int y) = 0;
+    virtual int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour) = 0;
+    virtual void move(Plateau &p, int x1, int y1, int x2, int y2) = 0;
+    virtual int etatPartie(Plateau &p) = 0;
+    virtual bool placePiece(Plateau &p, Piece &piece, int x, int y) = 0;
 };
 #endif /* Regles_hpp */
