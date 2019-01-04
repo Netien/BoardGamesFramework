@@ -16,6 +16,8 @@ class Affichage
     public :
     virtual void affichageTotal(Plateau & p)=0;
     virtual void affichagePartiel(Plateau & p, Joueur j)=0;
+    void demanderMouvement();
+    void demanderPlacement();
 };
 
 #endif /* Affichage_hpp */
