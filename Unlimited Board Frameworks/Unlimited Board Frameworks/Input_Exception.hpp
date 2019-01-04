@@ -17,13 +17,13 @@
 class Input_Exception: public std::exception
 {
 public:
-    Input_Exception(std::string type= "Erreur d'input", std::string phrase="Une erreur d'entree a eu lieu") throw()
+    Input_Exception(std::string phrase="Une erreur d'entree a eu lieu", std::string type= "Erreur d'input") throw()
     :m_type(type),m_phrase(phrase)
     {}
     
     virtual const char* what() const throw()
     {
-        return m_phrase.c_str();
+        return (m_type + " : " + m_phrase).c_str();
     }
     
     std::string getType() const throw()

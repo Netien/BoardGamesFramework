@@ -12,6 +12,7 @@ using namespace std;
 
 void Afficheur_Stratego::affichageTotal(Plateau & p)
 {
+    cout << endl;
     for(int y = p.getHauteur()-1; y >= 0; y--)
     {
         cout << endl;
@@ -52,6 +53,7 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
             }
         }
     }
+    cout << endl;
     cout << endl;
 }
 
