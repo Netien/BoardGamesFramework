@@ -66,58 +66,57 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
     int j;
     //Sortie du plateau
     if( not (plateau.contains(x1, y1))){
-	return 1;
+        throw Move_Exception(1);
     }
 
     if ( not (plateau.contains(x2, y2))){
-	return 1;
+        throw Move_Exception(1);
     }
-    
  
     //Déplacement non orthogonal
     if(x1 != x2 && y1 != y2)
-	return 2;
+        throw Move_Exception(2);
     //Mouvement sur la meme case
     if(x1 == x2 && y1 == y2)
-	return 3;
+        throw Move_Exception(3);
     //Case de depart vide
     c = plateau.getCase(x1, y1);
     if(c.isEmpty())
-	return 4;
+        throw Move_Exception(4);
     //Piece n'appartient pas au joueur courant
     Piece piece = c.getPiece();
     if(j_tour.getId() != piece.getJoueur().getId())
-	return 10;
+	throw Move_Exception(10);
     type_m = piece.getType();
     //Piece ne peut pas bouger
     if(type_m == 0 || type_m == 11 )
-	return 5;
+        throw Move_Exception(5);
     //On passe sur les 2 memes case pendant 5 coups
     if(!count_Dif_Pos_Ok(piece, c))
-	return 11;
+        throw Move_Exception(11);
     //distance de + d'une case interdit 
     if(type_m != 2 && abs(x1-x2+y1-y2) != 1)
-	return 6;
+	throw Move_Exception(6);
     i = x2;
     j = y2;
     while(i != x1 || j != y1){
 	c = plateau.getCase(i, j);
 	//Case inutiliable
 	if(c.getCouleur() == 1)
-	    return 7;
+	    throw Move_Exception(7);
 	//Case d'arrivée occupée par piece du joueur actif
 	if(i == x2 && j == y2){
 	    if(!c.isEmpty())
 	    {
 		if(j_tour.getId() == piece.getJoueur().getId())
 		{
-		    return 8;
+		    throw Move_Exception(8);
 		}
 	    }
 	}
 	//Case intermediaire non-vide
 	if( not c.isEmpty())
-	    return 9;
+	    throw Move_Exception(9);
       
 	//incrémentation/décrémentation adaptée
 	if(i > x1)

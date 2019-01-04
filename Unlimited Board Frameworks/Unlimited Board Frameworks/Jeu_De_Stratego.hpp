@@ -17,7 +17,7 @@
 class Jeu_De_Stratego : public Jeu {
     
 public :
-    Jeu_De_Stratego( Plateau_De_Stratego &p, R_Stratego &r, vector<Joueur> &v, Afficheur_Stratego &a);
+    Jeu_De_Stratego( Plateau_De_Stratego &p, R_Stratego &r, std::vector<Joueur> &v, Afficheur_Stratego &a);
     void start();
 };
 

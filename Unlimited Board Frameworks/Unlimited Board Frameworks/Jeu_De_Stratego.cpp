@@ -10,6 +10,8 @@
 #include "Plateau_De_Stratego.hpp"
 #include <cassert>
 
+using namespace std;
+
 Jeu_De_Stratego::Jeu_De_Stratego(Plateau_De_Stratego &p, R_Stratego &r, vector<Joueur> &v, Afficheur_Stratego &a) : Jeu(p, r, v, a)
 { assert(v.size()==2); }
 
