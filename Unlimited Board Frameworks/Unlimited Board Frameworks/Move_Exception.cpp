@@ -1,28 +1,28 @@
 #include "Move_Exception.hpp"
 
-Move_Exception::Move_Exception(int type) : num(type){
-    switch(num){
-    case 1: msg{"Sortie du plateau"};
+Move_Exception::Move_Exception(int type) : numero(type){
+    switch(numero){
+    case 1: msg = "Sortie du plateau";
 	break;
-    case 2: msg{"Deplacement non-orthogonal"};
+    case 2: msg = "Deplacement non-orthogonal";
 	break;	
-    case 3: msg{"Mouvement Sur la meme case"};
+    case 3: msg = "Mouvement Sur la meme case";
 	break;
-    case 4: msg{"Case de depart vide"};
+    case 4: msg = "Case de depart vide";
 	break;
-    case 5: msg{"Piece immobile"};
+    case 5: msg = "Piece immobile";
 	break;
-    case 6: msg{"Mouvement de plus d'une case interdit"};
+    case 6: msg = "Mouvement de plus d'une case interdit";
 	break;
-    case 7: msg{"Case inutilisable"};
+    case 7: msg = "Case inutilisable";
 	break;
-    case 8: msg{"Case occupee par une piece du joueur"};
+    case 8: msg = "Case occupee par une piece du joueur";
 	break;
-    case 9: msg{"Chemin bloque par une piece"};
+    case 9: msg = "Chemin bloque par une piece";
 	break;
-    case 10: msg{"Piece d'un autre joueur a la position de depart"};
+    case 10: msg = "Piece d'un autre joueur a la position de depart";
 	break;
-    case 11: msg{"Passage d'une piece sur 2 memes cases en 5 tours"};
+    case 11: msg = "Passage d'une piece sur 2 memes cases en 5 tours";
 	break;
     }
 }
@@ -30,5 +30,5 @@ Move_Exception::Move_Exception(int type) : num(type){
 Move_Exception::~Move_Exception() throw (){}
 
 const char* Move_Exception::what(){
-    msg.c_str();
+    return msg.c_str();
 }
