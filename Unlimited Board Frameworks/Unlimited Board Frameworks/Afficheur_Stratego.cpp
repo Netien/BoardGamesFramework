@@ -57,6 +57,11 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
     cout << endl;
 }
 
+void Afficheur_Stratego::affichageBienvenue()
+{
+    cout << "Bienvenue dans le Stratégo !" << endl;
+}
+
 void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
 {
     

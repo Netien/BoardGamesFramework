@@ -14,3 +14,8 @@ Jeu::Jeu(Plateau &p, Regles &r, vector<Joueur> &listJoueurs, Affichage &a) : m_p
 {
     
 }
+
+void Jeu::start()
+{
+    
+}

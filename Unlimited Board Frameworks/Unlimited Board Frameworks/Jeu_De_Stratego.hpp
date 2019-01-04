@@ -15,9 +15,13 @@
 #include "Afficheur_Stratego.hpp"
 
 class Jeu_De_Stratego : public Jeu {
+
+private :
+    
     
 public :
     Jeu_De_Stratego( Plateau_De_Stratego &p, R_Stratego &r, std::vector<Joueur> &v, Afficheur_Stratego &a);
+    void remplirListePieces();
     void start();
 };
 

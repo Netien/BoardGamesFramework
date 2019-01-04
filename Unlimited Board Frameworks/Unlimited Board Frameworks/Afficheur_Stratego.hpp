@@ -18,6 +18,7 @@ class Afficheur_Stratego : public Affichage
 public :
     void affichageTotal(Plateau & p);
     void affichagePartiel(Plateau & p, Joueur j);
+    void affichageBienvenue();
 };
 
 
