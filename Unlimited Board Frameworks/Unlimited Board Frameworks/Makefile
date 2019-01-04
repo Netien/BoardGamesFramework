@@ -1,32 +1,44 @@
 all: main
 c = g++ -Wall -std=c++11
 
-main: main.o Joueur.o Piece.o Case.o Plateau.o Regles.o Plateau_De_Stratego.o R_Stratego.o
-	$c -o main main.o R_Stratego.o Plateau_De_Stratego.o Plateau.o Regles.o Case.o Piece.o Joueur.o
+main: main.o Joueur.o Piece.o Case.o Plateau.o Regles.o Plateau_De_Stratego.o R_Stratego.o Afficheur_Stratego.o Affichage.o Jeu_De_Stratego.o Jeu.o
+	$c -o main main.o R_Stratego.o Plateau_De_Stratego.o Plateau.o Regles.o Case.o Piece.o Joueur.o Afficheur_Stratego.o Affichage.o Jeu_De_Stratego.o Jeu.o
 
-main.o: main.cpp R_Stratego.hpp Plateau_De_Stratego.hpp Case.hpp Piece.hpp Joueur.hpp
-	$c -c main.cpp R_Stratego.hpp Plateau_De_Stratego.hpp Case.hpp Piece.hpp Joueur.hpp
+main.o: main.cpp 
+	$c -c main.cpp
 
-R_Stratego.o: R_Stratego.cpp R_Stratego.hpp
-	$c -c R_Stratego.cpp R_Stratego.hpp
+R_Stratego.o: R_Stratego.cpp
+	$c -c R_Stratego.cpp
 
-Plateau_De_Stratego.o: Plateau_De_Stratego.cpp Plateau_De_Stratego.hpp
-	$c -c Plateau_De_Stratego.cpp Plateau_De_Stratego.hpp
+Plateau_De_Stratego.o: Plateau_De_Stratego.cpp
+	$c -c Plateau_De_Stratego.cpp
 
-Regles.o: Regles.cpp Regles.hpp
-	$c -c Regles.cpp Regles.hpp
+Regles.o: Regles.cpp
+	$c -c Regles.cpp
 
-Plateau.o: Plateau.cpp Plateau.hpp
-	$c -c Plateau.cpp Plateau.hpp
+Plateau.o: Plateau.cpp
+	$c -c Plateau.cpp
 
-Case.o: Case.cpp Case.hpp
-	$c -c Case.cpp Case.hpp
+Case.o: Case.cpp
+	$c -c Case.cpp
 
-Piece.o: Piece.cpp Piece.hpp
-	$c -c Piece.cpp Piece.hpp
+Piece.o: Piece.cpp
+	$c -c Piece.cpp
 
-Joueur.o: Joueur.cpp Joueur.hpp 
-	$c -c Joueur.cpp Joueur.hpp
+Joueur.o: Joueur.cpp
+	$c -c Joueur.cpp
+
+Afficheur_Stratego.o : Afficheur_Stratego.cpp
+	$c -c Afficheur_Stratego.cpp
+
+Affichage.o : Affichage.cpp
+	$c -c Affichage.cpp
+
+Jeu_De_Stratego.o : Jeu_De_Stratego.cpp
+	$c -c Jeu_De_Stratego.cpp
+
+Jeu.o : Jeu.cpp
+	$c -c Jeu.cpp
 
 clean:
 	rm *.o *.gch *~ $ main 

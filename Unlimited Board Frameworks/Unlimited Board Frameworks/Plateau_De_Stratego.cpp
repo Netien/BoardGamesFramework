@@ -53,4 +53,3 @@ Plateau_De_Stratego::Plateau_De_Stratego() : Plateau(10, 10)
 	listePiece.push_back(Piece(-1,-1,));
 	} */
 }
-

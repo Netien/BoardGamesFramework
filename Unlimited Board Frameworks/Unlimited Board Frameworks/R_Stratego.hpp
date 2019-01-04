@@ -23,7 +23,7 @@ private:
     vector<vector<Case> > positions;
     virtual bool count_Dif_Pos_Ok(Piece &piece, Case &c);
     virtual void recordMove(Plateau &plateau, Piece &piece, int x, int y);
-  
+    
 public :
     R_Stratego();
     virtual int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour);

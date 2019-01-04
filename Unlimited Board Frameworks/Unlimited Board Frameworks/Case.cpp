@@ -27,7 +27,11 @@ int Case::getY(){ return m_coordY; }
 
 void Case::setPiece(Piece *p){ m_piece = p; }
 
-void Case::setCouleur(int coul) { m_couleur = coul; }
+void Case::setCouleur(int coul) {
+    
+    m_couleur = coul;
+
+}
 
 void Case::setCoord(int x, int y) { m_coordX = x; m_coordY = y; }
 

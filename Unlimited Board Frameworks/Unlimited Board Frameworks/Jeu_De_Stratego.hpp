@@ -11,11 +11,14 @@
 
 #include "Jeu.hpp"
 #include "Plateau_De_Stratego.hpp"
+#include "R_Stratego.hpp"
+#include "Afficheur_Stratego.hpp"
 
-class Jeu_De_Stratego : Jeu {
+class Jeu_De_Stratego : public Jeu {
     
 public :
-    Jeu_De_Stratego( Plateau_De_Stratego & p, R_Stratego & r, vector<Joueur> & v );
+    Jeu_De_Stratego( Plateau_De_Stratego &p, R_Stratego &r, vector<Joueur> &v, Afficheur_Stratego &a);
+    void start();
 };
 
 #endif /* Jeu_De_Stratego_hpp */

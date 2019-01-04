@@ -221,7 +221,7 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 	return false;
     
     plateau.dispatch(piece, x, y);
-    plateau.addPiece(piece);
+    plateau.ajoutPiece(piece);
     
     return true;
 }

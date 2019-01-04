@@ -12,6 +12,8 @@
 #include "Joueur.hpp"
 #include "R_Stratego.hpp"
 #include "Plateau_De_Stratego.hpp"
+#include "Afficheur_Stratego.hpp"
+#include "Jeu_De_Stratego.hpp"
 
 using namespace std;
 
@@ -19,11 +21,12 @@ int main(int argc, const char * argv[]) {
     Plateau_De_Stratego p{};
     R_Stratego r{};
     vector<Joueur> l_j{};
-
+    Afficheur_Stratego afS;
+    
     Joueur b = Joueur("Bob");
     Joueur v = Joueur("Alice");
-    std::cout << b.getId() << endl;
-    std::cout << v.getId() << endl;
+    cout << b.getId() << endl;
+    cout << v.getId() << endl;
     l_j.push_back(b);
     l_j.push_back(v);
 
@@ -34,8 +37,17 @@ int main(int argc, const char * argv[]) {
     Piece q2 = Piece(5, b);
     Piece q3 = Piece(10, b);
 
-    std::cout << r.placePiece(p, p1, 2, 3) << endl;
-    std::cout << r.placePiece(p, p2, 5, 9) << endl;
+    cout << r.placePiece(p, p1, 2, 3) << endl;
+    cout << r.placePiece(p, p2, 5, 9) << endl;
+    cout << l_j.size() << endl;
+
+    
+    Jeu_De_Stratego j{p, r, l_j, afS};
+    j.start();
+    
+    
+                
+    
     
     return 0;
 }
