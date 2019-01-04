@@ -9,12 +9,12 @@
 
 using namespace std;
 
-bool R_Stratego::count_Dif_Pos_Ok(Piece &piece, Case &c){
+/* bool R_Stratego::count_Dif_Pos_Ok(Piece &piece, Case &c){
     int id = piece.getId();
     int idx = 1;
-    while(idx < 5){
-	if(c == positions.at(id).at(idx) ||
-	   positions.at(id).at(0) == positions.at(id).at(id) ||
+    while(idx < 4){
+	if(c == positions.at(id).at(idx) &&
+	   positions.at(id).at(0) == positions.at(id).at(id) &&
 	   positions.at(id).at(idx) != Case() )
 	    return false;
 	idx++;
@@ -30,8 +30,8 @@ void R_Stratego::recordMove(Plateau &plateau, Piece &piece, int x, int y){
 	idx--;
     }
     positions.at(id).at(idx) = plateau.getCase(x, y);
-};
-  
+    };*/
+
 R_Stratego::R_Stratego() :
     positions(vector<vector<Case> >(80, vector<Case>(4, Case()) ) )
 {};
@@ -91,9 +91,13 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
     //Piece ne peut pas bouger
     if(type_m == 0 || type_m == 11 )
         throw Move_Exception(5);
+
+    /*
     //On passe sur les 2 memes case pendant 5 coups
     if(!count_Dif_Pos_Ok(piece, c))
         throw Move_Exception(11);
+    */
+    
     //distance de + d'une case interdit 
     if(type_m != 2 && abs(x1-x2+y1-y2) != 1)
 	throw Move_Exception(6);
@@ -115,7 +119,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
 	    }
 	}
 	//Case intermediaire non-vide
-	if( not c.isEmpty())
+	else if( not c.isEmpty())
 	    throw Move_Exception(9);
       
 	//incrémentation/décrémentation adaptée
@@ -137,7 +141,7 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     int t2;
     if(plateau.getCase(x2, y2).isEmpty()){
 	plateau.move(x1, y1, x2, y2);
-	recordMove(plateau, p1, x2, y2);
+	//recordMove(plateau, p1, x2, y2);
     }
     else{
 	Piece p2 = plateau.getCase(x2, y2).getPiece();
@@ -146,7 +150,7 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
 	if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
 	    plateau.discard(p2);
 	    plateau.move(x1, y1, x2, y2);
-	    recordMove(plateau, p1, x2, y2);
+	    //recordMove(plateau, p1, x2, y2);
 	}
 	else if(t2 > t1){
 	    plateau.discard(p1);
