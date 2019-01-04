@@ -11,9 +11,7 @@
 
 Plateau_De_Stratego::Plateau_De_Stratego() : Plateau(10, 10)
 {
-    
-    int id = 0;
-    int type;
+    //int type;
     
     for(int y = 4; y < 6; y++)
 	{
