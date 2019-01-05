@@ -9,7 +9,7 @@
 #include "Jeu_De_Stratego.hpp"
 #include "Plateau_De_Stratego.hpp"
 #include <cassert>
-
+#include "Input_Taker.hpp"
 using namespace std;
 
 Jeu_De_Stratego::Jeu_De_Stratego(Plateau_De_Stratego &p, R_Stratego &r, vector<Joueur> &v, Afficheur_Stratego &a) : Jeu(p, r, v, a)
@@ -27,7 +27,6 @@ void Jeu_De_Stratego::remplirListePieces()
     for(int j = 0; j < 2; j++)
     {
         int type = 0;
-        
         for(int i = 0; i < 40; i++)
         {
             
@@ -69,6 +68,219 @@ void Jeu_De_Stratego::remplirListePieces()
 
 void Jeu_De_Stratego::start()
 {
+    
+    m_affichage.affichageBienvenue();
+    
     m_affichage.affichageTotal(m_plateau);
+    
+    
+    vector<std::string> res;
+    
+    for(int i = 0; i<m_plateau.getLongListePieces(); i++)
+    {
+        
+        
+        bool canPass = false;
+        
+        while (canPass == false)
+        {
+            m_affichage.demanderPlacement(m_plateau.getPiece(i));
+            
+            try{
+                res = Input_Taker::recupererPlacement();
+                
+                char c = res[0][0];
+                
+                int valX = c - 'a';
+                
+                std::string strY = res[0].substr(1);
+                
+                int valY = std::stoi(strY) - 1;
+                
+                if(m_regles.placePiece(m_plateau, m_plateau.getPiece(i), valX, valY))
+                {
+                    canPass = true;
+                }
+                else
+                {
+                    m_affichage.affichageErreurPlacement();
+                }
+                
+                m_affichage.affichageTotal(m_plateau);
+                
+                
+            }
+            catch(Input_Exception const& iE)
+            {
+                cerr << "ERREUR D'INPUT : " << iE.what() << endl;
+                canPass = false;
+            }
+            catch(std::exception const& e)
+            {
+                cerr << "ERREUR : " << e.what() << endl;
+                canPass = false;
+            }
+        }
+    }
+    
+    int cptTour =0;
+    
+    while(m_regles.etatPartie(m_plateau)==0)
+    {
+        
+        Joueur currentPlayer = m_listJoueurs[cptTour%2];
+        cptTour++;
+        
+        bool canPass = false;
+        while (canPass == false)
+        {
+            try{
+                m_affichage.affichageTotal(m_plateau);
+                m_affichage.demanderMouvement();
+                std::vector<string> res = Input_Taker::recupererMouvement();
+                
+                char c1 = res[0][0];
+                int valX1 = c1 - 'a';
+                std::string strY1 = res[0].substr(1);
+                int valY1 = std::stoi(strY1) - 1;
+                
+                char c2 = res[1][0];
+                int valX2 = c2 - 'a';
+                std::string strY2 = res[1].substr(1);
+                int valY2 = std::stoi(strY2) - 1;
+                if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
+                {
+                   m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
+                }
+            }
+            catch(Input_Exception iE)
+            {
+                cerr << "ERREUR D'INPUT : " << iE.what() << endl;
+                canPass = false;
+            }
+            
+            catch(Move_Exception mE)
+            {
+                cerr << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
+                canPass = false;
+            }
+        }
+        
+    }
+    
+    cout << "Partie finie !" << endl;
+    
+    
 
 }
+
+
+void Jeu_De_Stratego::startTest()
+{
+    
+    m_affichage.affichageBienvenue();
+    
+    m_affichage.affichageTotal(m_plateau);
+    
+    
+    
+    int i = 0;
+    
+    
+    
+    
+    
+    int ind;
+    int j;
+    
+    for ( ind = 0; ind < 10 ; ind ++)
+    {
+        for ( j = 0; j<4; j++)
+        {
+            m_regles.placePiece(m_plateau, m_plateau.getPiece(i), ind, j);
+            
+            i++;
+            
+        }
+    }
+    
+    for ( ind = 0; ind < 10 ; ind ++)
+    {
+        for ( j = 9; j>5; j--)
+        {
+            cout << "Allo" << endl;
+            m_regles.placePiece(m_plateau, m_plateau.getPiece(i), ind, j);
+            
+            i++;
+            
+        }
+    }
+    
+    
+    
+    m_affichage.affichageTotal(m_plateau);
+    
+    
+    
+    
+    
+    
+    //std::cout << "coucou j'arrive la, i est " << i << endl;
+    int cptTour =0;
+    
+    while(m_regles.etatPartie(m_plateau)==0)
+    {
+        
+        Joueur currentPlayer;
+        
+        
+        bool canPass = false;
+        
+        while (canPass == false)
+        {
+            try
+            {
+                
+                m_affichage.affichageTotal(m_plateau);
+                currentPlayer = m_listJoueurs[cptTour%2];
+                cout << "Joueur courent :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
+                m_affichage.demanderMouvement();
+                std::vector<string> res = Input_Taker::recupererMouvement();
+                
+                char c1 = res[0][0];
+                int valX1 = c1 - 'a';
+                std::string strY1 = res[0].substr(1);
+                int valY1 = std::stoi(strY1) - 1;
+                
+                char c2 = res[1][0];
+                int valX2 = c2 - 'a';
+                std::string strY2 = res[1].substr(1);
+                int valY2 = std::stoi(strY2) - 1;
+                if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
+                {
+                    m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
+                }
+                
+                cptTour++;
+            }
+            catch(Input_Exception iE)
+            {
+                cerr << "ERREUR D'INPUT : " << iE.what() << endl;
+                canPass = false;
+            }
+            
+            catch(Move_Exception mE)
+            {
+                cerr << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
+                canPass = false;
+            }
+        }
+        
+    }
+    
+    cout << "Partie finie !" << endl;
+    
+    
+    
+}
+

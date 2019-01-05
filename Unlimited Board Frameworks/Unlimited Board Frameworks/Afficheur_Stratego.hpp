@@ -19,6 +19,8 @@ public :
     void affichageTotal(Plateau & p);
     void affichagePartiel(Plateau & p, Joueur j);
     void affichageBienvenue();
+    void demanderPlacement(Piece& p);
+    std::string quelType(int i);
 };
 
 

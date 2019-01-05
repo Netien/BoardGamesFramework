@@ -17,17 +17,18 @@
 
 class Case{
 private :
-    Piece *m_piece; //Une case peut avoir une piece ou non (pointeur NULL dans ce cas)
+    Piece *m_piece; //Une case peut avoir une piece ou non
     int m_coordX;
     int m_coordY;
     int m_couleur;
     
 public :
+    static Piece puit;
     Case();
     Case(int coordX, int coordY);
     Case(int coordX, int coordY, int couleur);
     
-    Piece getPiece();
+    Piece* getPiece();
     int getCouleur();
     int getX();
     int getY();

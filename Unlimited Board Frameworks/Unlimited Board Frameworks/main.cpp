@@ -30,20 +30,9 @@ int main(int argc, const char * argv[]) {
     l_j.push_back(b);
     l_j.push_back(v);
 
-    Piece p1 = Piece(2, b);
-    Piece p2 = Piece(11, b);
-    Piece p3 = Piece(3, b);
-    Piece q1 = Piece(0, b);
-    Piece q2 = Piece(5, b);
-    Piece q3 = Piece(10, b);
-
-    cout << r.placePiece(p, p1, 2, 3) << endl;
-    cout << r.placePiece(p, p2, 5, 9) << endl;
-    cout << l_j.size() << endl;
-
     
     Jeu_De_Stratego j{p, r, l_j, afS};
-    j.start();
+    j.startTest();
     
     
                 

@@ -8,18 +8,28 @@
 
 #include "Input_Taker.hpp"
 
-std::vector<std::string> Input_Taker::split(std::string chaine, char delimiteur)
-{
-    std::vector<std::string> elements;
-    std::stringstream ss(chaine);
-    std::string sousChaine;
-    
-    while (getline(ss, sousChaine, delimiteur))
-    {
-        elements.push_back(sousChaine);
+
+std::vector<std::string> Input_Taker::split(const std::string &text, char sep) {
+    std::vector<std::string> tokens;
+    std::size_t start = 0, end = 0;
+    while ((end = text.find(sep, start)) != std::string::npos) {
+        tokens.push_back(text.substr(start, end - start));
+        start = end + 1;
     }
-    return elements;
-}
+    tokens.push_back(text.substr(start));
+    return tokens;
+}//split(std::string chaine, char delimiteur)
+//{
+//    std::vector<std::string> elements;
+//    std::stringstream ss(chaine);
+//    std::string sousChaine;
+//    
+//    while (getline(ss, sousChaine, delimiteur))
+//    {
+//        elements.push_back(sousChaine);
+//    }
+//    return elements;
+//}
 
 std::vector<std::string> Input_Taker::recupererPlacement()
 {
@@ -58,9 +68,9 @@ std::vector<std::string> Input_Taker::recupererPlacement()
         }
     }
     
+
     return res;
 
-    
 }
 
 
@@ -68,9 +78,11 @@ std::vector<std::string> Input_Taker::recupererPlacement()
 std::vector<std::string> Input_Taker::recupererMouvement()
 {
     std::string req;
-    std::cin >> req;
-    std::vector<std::string> res;
-    res = Input_Taker::split(req, ' ');
+    getline (std::cin, req);
+    std::vector<std::string> res = Input_Taker::split(req, ' ');
+    
+    //std::cout << "res est de longueur " << res.size() << std::endl;
+    
     if (res.size()!=2)
     {
         throw Input_Exception("Deux mots demandés", "Erreur de format");

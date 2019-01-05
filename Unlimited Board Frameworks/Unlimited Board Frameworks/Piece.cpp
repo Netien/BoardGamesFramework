@@ -7,8 +7,12 @@
 //
 
 #include "Piece.hpp"
-
+#include "Jeu.hpp"
 int Piece::id = 0;
+
+Piece::Piece() : m_joueur(Jeu::personne), m_coordX(-1),	m_coordY(-1), m_type(-1), p_id(id)
+{
+}
 
 Piece::Piece(int type, Joueur &j) : m_joueur(j), m_coordX(-1),	m_coordY(-1), m_type(type), p_id(id)
 {
@@ -28,3 +32,4 @@ Joueur Piece::getJoueur(){ return m_joueur; }
 int Piece::getType(){ return m_type; }
 
 void Piece::move(int x, int y){ m_coordX = x ; m_coordY = y ; }
+

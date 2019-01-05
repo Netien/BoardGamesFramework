@@ -10,6 +10,8 @@
 
 using namespace std;
 
+Joueur Jeu::personne = Joueur();
+
 Jeu::Jeu(Plateau &p, Regles &r, vector<Joueur> &listJoueurs, Affichage &a) : m_plateau(p), m_regles(r), m_listJoueurs(listJoueurs), m_affichage(a)
 {
     

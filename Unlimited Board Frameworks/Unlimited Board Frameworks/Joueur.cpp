@@ -12,9 +12,16 @@ using namespace std;
 
 int Joueur::id = 0;
 
+Joueur::Joueur() : m_nom("Personne"), m_score(0), m_id(-1)
+{
+    
+}
+
 Joueur::Joueur(string nom) : m_nom(nom), m_score(0), m_id(id)
 {
     id++;
 }
 
 int Joueur::getId(){ return m_id; }
+
+string Joueur::getNom(){ return m_nom; }

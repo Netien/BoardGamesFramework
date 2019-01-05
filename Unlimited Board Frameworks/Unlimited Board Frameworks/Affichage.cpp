@@ -17,3 +17,13 @@ void Affichage::demanderPlacement()
 {
     std::cout << "Où voulez vous placer la piece ? (format \"a1\")" << std::endl;
 }
+
+void Affichage::demanderPlacement(Piece& p)
+{
+    std::cout << "ou voulez vous placer le pion, " << p.getJoueur().getNom() << " ?";
+}
+
+void Affichage::affichageErreurPlacement()
+{
+    std::cout << "vous ne pouvez pas placer le pion ici" << std::endl;
+}
