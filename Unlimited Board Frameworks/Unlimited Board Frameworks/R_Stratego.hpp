@@ -19,7 +19,7 @@
 class R_Stratego : public Regles
 {
 private:
-    //std::vector<std::vector<Case> > positions;
+    std::vector<std::vector<Case> > positions;
     //virtual bool count_Dif_Pos_Ok(Piece &piece, Case &c);
     //virtual void recordMove(Plateau &plateau, Piece &piece, int x, int y);
     
@@ -30,4 +30,4 @@ public :
     virtual int etatPartie(Plateau &p);
     virtual bool placePiece(Plateau &p, Piece &piece, int x, int y);
 };
-#endif /* Regles_hpp */
+#endif /* R_Stratego.hpp */

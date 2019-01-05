@@ -39,7 +39,8 @@ public :
     void discard(Piece* p);
     void dispatch(Piece* p, int x, int y);
     void addPiece(Piece &piece);
-	
+    int nbPieces();
+    
     friend class Regles;
 };
 

@@ -33,9 +33,5 @@ int main(int argc, const char * argv[]) {
     Jeu_Echecs j{p, r, l_j, afS};
     j.start();
     
-    
-                
-    
-    
     return 0;
 }

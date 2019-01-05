@@ -34,7 +34,6 @@ using namespace std;
 //};
   
 R_Stratego::R_Stratego()
-    //positions(vector<vector<Case> >(80, vector<Case>(4, Case()) ) )
 {};
   
 /* Relation valeur-identite (pieces):
@@ -142,7 +141,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
 };
 
 void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
-    Piece p1 = *plateau.getCase(x1, y1).getPiece();
+    Piece *p1 = plateau.getCase(x1, y1).getPiece();
     int t1;
     int t2;
     
@@ -154,26 +153,26 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     }
     else
     {
-        Piece p2 = *plateau.getCase(x2, y2).getPiece();
-        t1 = p1.getType();
-        t2 = p2.getType();
+        Piece *p2 = plateau.getCase(x2, y2).getPiece();
+        t1 = p1->getType();
+        t2 = p2->getType();
         
-        Afficheur_Stratego::annoncerCombat(p1, p2);
+        Afficheur_Stratego::annoncerCombat(*p1, *p2);
         
         if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
-            plateau.discard(&p2);
+            plateau.discard(p2);
             plateau.move(x1, y1, x2, y2);
-            Afficheur_Stratego::annoncerVictoire(p1);
+            Afficheur_Stratego::annoncerVictoire(*p1);
             //recordMove(plateau, p1, x2, y2);
         }
         else if(t2 > t1){
-            plateau.discard(&p1);
-            Afficheur_Stratego::annoncerVictoire(p2);
+            plateau.discard(p1);
+            Afficheur_Stratego::annoncerVictoire(*p2);
         }
         else{
             Afficheur_Stratego::annoncerMatchNul();
-            plateau.discard(&p1);
-            plateau.discard(&p2);
+            plateau.discard(p1);
+            plateau.discard(p2);
         }
     }
 };
@@ -184,15 +183,17 @@ int R_Stratego::etatPartie(Plateau &plateau){
     bool bCanPlay = false;
     bool rCanPlay = false;
     int idx = 0;
-    while(idx < 80 && not (rFlag && bFlag && bCanPlay && rCanPlay) ){
-	Piece piece = plateau.getPiece(idx);
-	if(piece.getType() == 0){
+    int max = plateau.nbPieces();
+    while(idx < max && not (rFlag && bFlag && bCanPlay && rCanPlay) ){
+	Piece &piece = plateau.getPiece(idx);
+	if(piece.getX() == -1 && piece.getY() == -1){}
+        if(piece.getType() == 0){
 	    if(piece.getJoueur().getId() == 0)
 		bFlag = true;
 	    else
 		rFlag = true;
 	}
-	else if(piece.getType() != 11 && not (rCanPlay && bCanPlay)){
+	else if(piece.getType() != 11 /*&& not (rCanPlay && bCanPlay)*/){
 	    if(piece.getJoueur().getId() == 0)
 		bCanPlay = true;
 	    else
@@ -202,16 +203,17 @@ int R_Stratego::etatPartie(Plateau &plateau){
     }
   
     
-    //Si le bleu s'est fait capturer son drapeau (victoire des rouges).
-    if(!bFlag) return 1;
-    //Si le rouge s'est fait capturer son drapeau (victoire des bleu).
-    else if(!rFlag) return 2;
     //Si le rouge ET le bleu ne peuvent jouer (égalité).
-    else if(!bCanPlay && !rCanPlay) return 3;
+    if(!bCanPlay && !rCanPlay)
+	return 3;
     //Si le bleu ne peut plus jouer (victoire des rouges).
     else if(!bCanPlay) return 4;
     //Si le rouge ne peut plus jouer (victoire des bleu).
     else if(!rCanPlay) return 5;
+    //Si le bleu s'est fait capturer son drapeau (victoire des rouges).
+    else if(!bFlag) return 1;
+    //Si le rouge s'est fait capturer son drapeau (victoire des bleu).
+    else if(!rFlag) return 2;
     //Sinon
     else return 0;
 }
@@ -246,6 +248,7 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
         //cout << "par la" << endl;
         return false;
     }
+    plateau.ajoutPiece(piece);
     plateau.dispatch(&piece, x, y);
 
     

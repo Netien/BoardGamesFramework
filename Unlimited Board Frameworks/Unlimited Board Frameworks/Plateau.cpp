@@ -58,7 +58,7 @@ const unsigned long Plateau::getLongListePieces() const
 }
 
 void Plateau::move(int x1, int y1, int x2, int y2){
-    Piece * p = getCase(x1, y1).getPiece();
+    Piece *p = getCase(x1, y1).getPiece();
     dispatch(p, x2, y2);
     discard(x1, y1);
 }
@@ -74,6 +74,7 @@ void Plateau::discard(Piece *p){
 }
 
 void Plateau::dispatch(Piece* p, int x, int y){
+    getCase(x, y).getPiece()->move(-1,-1);
     getCase(x, y).setPiece(p);
     p->move(x, y);
 }
@@ -90,4 +91,6 @@ void Plateau::ajoutPiece(Piece &piece){
     m_listePieces.push_back(piece);
 }
 
-
+int Plateau::nbPieces(){
+    return m_listePieces.size();
+}
