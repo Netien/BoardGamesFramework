@@ -187,7 +187,7 @@ int R_Stratego::etatPartie(Plateau &plateau){
     while(idx < max && not (rFlag && bFlag && bCanPlay && rCanPlay) ){
 	Piece &piece = plateau.getPiece(idx);
 	if(piece.getX() == -1 && piece.getY() == -1){}
-        if(piece.getType() == 0){
+        else if(piece.getType() == 0){
 	    if(piece.getJoueur().getId() == 0)
 		bFlag = true;
 	    else

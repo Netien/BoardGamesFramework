@@ -50,7 +50,7 @@ int Plateau::getLargeur()
 
 Case& Plateau::getCase(int x, int y){ return m_damier[x][y]; };
 
-Piece& Plateau::getPiece(int p_id){ return m_listePieces[p_id]; }
+Piece& Plateau::getPiece(int p_id){ return *(m_listePieces[p_id]); }
 
 const unsigned long Plateau::getLongListePieces() const
 {
@@ -80,15 +80,15 @@ void Plateau::dispatch(Piece* p, int x, int y){
 }
 
 void Plateau::ajoutPiece(Piece &piece){
-    for (Piece& p : m_listePieces)
+    for (Piece *p : m_listePieces)
     {
-        if(p.getId()==piece.getId())
+        if(p->getId()==piece.getId())
         {
             throw runtime_error("piece deja presente dans plateau");
         }
             
     }
-    m_listePieces.push_back(piece);
+    m_listePieces.push_back(&piece);
 }
 
 int Plateau::nbPieces(){

@@ -20,7 +20,7 @@ protected :
     int const m_largeur;
     int const m_hauteur;
     std::vector<std::vector<Case> > m_damier;
-    std::vector<Piece> m_listePieces;
+    std::vector<Piece*> m_listePieces;
     
 public :
     
