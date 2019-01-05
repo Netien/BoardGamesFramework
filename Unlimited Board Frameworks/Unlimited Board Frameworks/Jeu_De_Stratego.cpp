@@ -232,7 +232,6 @@ void Jeu_De_Stratego::startTest()
     
     
     
-    //std::cout << "coucou j'arrive la, i est " << i << endl;
     int cptTour =0;
     
     while(m_regles.etatPartie(m_plateau)==0)

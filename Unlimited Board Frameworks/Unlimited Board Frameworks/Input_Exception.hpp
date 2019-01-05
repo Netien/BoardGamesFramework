@@ -16,6 +16,10 @@
 
 class Input_Exception: public std::exception
 {
+    
+private:
+    std::string m_type;               //Type de l'erreur
+    std::string m_phrase;            //Description de l'erreur
 public:
     Input_Exception(std::string phrase="Une erreur d'entree a eu lieu", std::string type= "Erreur d'input") throw()
     :m_type(type),m_phrase(phrase)
@@ -34,9 +38,7 @@ public:
     virtual ~Input_Exception() throw()
     {}
     
-private:
-    std::string m_type;               //Type de l'erreur
-    std::string m_phrase;            //Description de l'erreur
+
     
 };
 #endif /* Input_Exception_hpp */

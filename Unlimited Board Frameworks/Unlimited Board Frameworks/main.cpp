@@ -14,14 +14,18 @@
 #include "Plateau_Echecs.hpp"
 #include "Afficheur_Echecs.hpp"
 #include "Jeu_Echecs.hpp"
+#include "Plateau_De_Stratego.hpp"
+#include "R_Stratego.hpp"
+#include "Afficheur_Stratego.hpp"
+#include "Jeu_De_Stratego.hpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    Plateau_Echecs p{};
-    Regles_Echecs r{};
+    Plateau_De_Stratego p{};
+    R_Stratego r{};
     vector<Joueur> l_j{};
-    Afficheur_Echecs afS;
+    Afficheur_Stratego afS;
     
     Joueur b = Joueur("Bob");
     Joueur v = Joueur("Alice");
@@ -30,8 +34,26 @@ int main(int argc, const char * argv[]) {
     l_j.push_back(b);
     l_j.push_back(v);
 
-    Jeu_Echecs j{p, r, l_j, afS};
+    Jeu_De_Stratego j{p, r, l_j, afS};
     j.start();
     
+    
+    
+//    Plateau_Echecs p{};
+//    Regles_Echecs r{};
+//    vector<Joueur> l_j{};
+//    Afficheur_Echecs afS;
+//    
+//    Joueur b = Joueur("Bob");
+//    Joueur v = Joueur("Alice");
+//    cout << b.getId() << endl;
+//    cout << v.getId() << endl;
+//    l_j.push_back(b);
+//    l_j.push_back(v);
+//    
+//    Jeu_Echecs j{p, r, l_j, afS};
+//    j.start();
+    
     return 0;
+
 }

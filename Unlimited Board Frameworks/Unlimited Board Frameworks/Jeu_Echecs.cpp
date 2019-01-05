@@ -7,7 +7,8 @@
 //
 
 #include "Jeu_Echecs.hpp"
-
+#include "Input_Taker.hpp"
+#include "Stratego_Move_Exception.hpp"
 
 Jeu_Echecs::Jeu_Echecs(Plateau_Echecs& p, Regles_Echecs& r, std::vector<Joueur>& v, Afficheur_Echecs& a) : Jeu(p, r, v, a)
 {
@@ -24,6 +25,7 @@ void Jeu_Echecs::remplirListePieces()
     for(int j = 0; j < 2; j++)
     {
         int type = 0;
+        
         for(int i = 0; i < 16; i++)
         {
             
@@ -47,7 +49,7 @@ void Jeu_Echecs::remplirListePieces()
             else
                 type = 0;//les pions
             
-            
+
             Piece p(type, m_listJoueurs[j]);
             
             m_plateau.ajoutPiece(p);
@@ -58,6 +60,8 @@ void Jeu_Echecs::remplirListePieces()
 
 void Jeu_Echecs::start()
 {
+    
+    
     m_affichage.affichageBienvenue();
     
     int i = 0;
@@ -65,6 +69,8 @@ void Jeu_Echecs::start()
     
     int x;
     int y;
+    
+    //On place les pieces dans le plateau
     
     for ( y = 0; y < 2 ; y ++)
     {
@@ -90,5 +96,64 @@ void Jeu_Echecs::start()
     }
     
     m_affichage.affichageTotal(m_plateau);
+    
+    int cptTour =0;
+    
+    Joueur currentPlayer = m_listJoueurs[0];
+    
+    while(m_regles.etatPartie(m_plateau)==0)
+    {
+        
+        
+        
+        
+        bool canPass = false;
+        
+        while (canPass == false)
+        {
+            try
+            {
+                
+                m_affichage.affichageTotal(m_plateau);
+                currentPlayer = m_listJoueurs[cptTour%2];
+                //cout << "Joueur courant :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
+                m_affichage.demanderMouvement(currentPlayer);
+                std::vector<std::string> res = Input_Taker::recupererMouvement();
+                
+                char c1 = res[0][0];
+                int valX1 = c1 - 'a';
+                std::string strY1 = res[0].substr(1);
+                int valY1 = std::stoi(strY1) - 1;
+                
+                char c2 = res[1][0];
+                int valX2 = c2 - 'a';
+                std::string strY2 = res[1].substr(1);
+                int valY2 = std::stoi(strY2) - 1;
+                if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
+                {
+                    m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
+                }
+                
+                cptTour++;
+            }
+            catch(Input_Exception iE)
+            {
+                std::cerr << "ERREUR D'INPUT : " << iE.what() << std::endl;
+                canPass = false;
+            }
+            
+            catch(Stratego_Move_Exception mE)
+            {
+                std::cerr << "ERREUR DE MOUVEMENT : " << mE.what() << std::endl;
+                canPass = false;
+            }
+        }
+        
+    }
+    
+    std::cout << "Partie finie !" << std::endl;
+    
+    
+
 
 }
