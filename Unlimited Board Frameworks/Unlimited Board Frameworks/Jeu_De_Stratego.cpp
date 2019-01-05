@@ -76,7 +76,7 @@ void Jeu_De_Stratego::start()
     
     vector<std::string> res;
     
-    for(int i = 0; i<m_plateau.getLongListePieces(); i++)
+    for(unsigned int i = 0; i<m_plateau.getLongListePieces(); i++)
     {
         
         

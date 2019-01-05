@@ -17,7 +17,7 @@
 
 class Piece{
 private :
-    Joueur m_joueur; //Une piece a toujours un joeur associé (donc référence)
+    Joueur *m_joueur; //Une piece a toujours un joeur associé (donc référence)
     int m_coordX;
     int m_coordY;
     int m_type;

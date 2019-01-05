@@ -10,6 +10,7 @@
 #define Plateau_hpp
 
 #include <vector>
+#include <stdexcept>
 #include "Case.hpp"
 #include "Piece.hpp"
 
@@ -18,7 +19,7 @@ class Plateau {
 protected :
     int const m_largeur;
     int const m_hauteur;
-    std::vector<std::vector<Case>> m_damier;
+    std::vector<std::vector<Case> > m_damier;
     std::vector<Piece> m_listePieces;
     
 public :
