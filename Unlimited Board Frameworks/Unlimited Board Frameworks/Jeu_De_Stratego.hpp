@@ -26,4 +26,6 @@ public :
     void startTest();
 };
 
+
+
 #endif /* Jeu_De_Stratego_hpp */

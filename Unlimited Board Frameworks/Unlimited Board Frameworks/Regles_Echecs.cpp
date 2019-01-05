@@ -30,8 +30,40 @@ int Regles_Echecs::etatPartie(Plateau &p)
     return 0;
 }
 
-bool Regles_Echecs::placePiece(Plateau &p, Piece &piece, int x, int y)
+
+bool Regles_Echecs::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 {
-    //TODO
+    if(not plateau.contains(x, y)){
+        
+        return false;
+    }
+    
+    
+    if(piece.getJoueur().getId() == 0)
+    {
+        if(y>=2){
+            //cout << "la" << endl;
+            return false;
+        }
+    }
+    
+    if(piece.getJoueur().getId() == 1)
+    {
+        if(y<6){
+            
+            return false;
+        }
+    }
+    
+    
+    if( not (plateau.getCase(x, y).isEmpty()) )
+    {
+        
+        return false;
+    }
+    
+    plateau.dispatch(&piece, x, y);
+    
+    
     return true;
 }

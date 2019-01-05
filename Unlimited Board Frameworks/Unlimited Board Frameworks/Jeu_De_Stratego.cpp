@@ -194,12 +194,7 @@ void Jeu_De_Stratego::startTest()
     
     m_affichage.affichageTotal(m_plateau);
     
-    
-    
     int i = 0;
-    
-    
-    
     
     
     int ind;

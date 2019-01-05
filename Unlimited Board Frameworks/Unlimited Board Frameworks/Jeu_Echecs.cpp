@@ -60,5 +60,35 @@ void Jeu_Echecs::start()
 {
     m_affichage.affichageBienvenue();
     
+    int i = 0;
+    
+    
+    int x;
+    int y;
+    
+    for ( y = 0; y < 2 ; y ++)
+    {
+        for ( x = 0; x<8; x ++)
+        {
+            m_regles.placePiece(m_plateau, m_plateau.getPiece(i), x, y);
+            
+            i++;
+            
+        }
+    }
+    
+    for ( y = 7; y >= 6 ; y --)
+    {
+        for ( x = 0; x<8; x ++)
+        {
+            //cout << "Allo" << endl;
+            m_regles.placePiece(m_plateau, m_plateau.getPiece(i), x, y);
+            
+            i++;
+            
+        }
+    }
+    
     m_affichage.affichageTotal(m_plateau);
+
 }

@@ -16,6 +16,7 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
     for(int y = p.getHauteur()-1; y >= 0; y--)
     {
         cout << endl;
+        cout << endl;
         
         for(int x = 0; x< p.getLargeur(); x++)
         {
@@ -25,12 +26,12 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
             {
                 if(c.getCouleur()==0)
                 {
-                    cout << " " << "\u25A0" << " ";
+                    cout << "\u25FB\t";
                 }
                 
                 if(c.getCouleur()==7)
                 {
-                    cout << " " << "\u25A1" << " ";
+                    cout << "\u25FC\t";
                 }
             }
             else
@@ -42,66 +43,66 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << " " << "\u2659" << " ";
+                        cout <<"\u2659\t" ;
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << " " << "\u265F" << " ";
+                        cout <<"\u265F\t";
                     }
                 }
                 else if (type == 1)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << " " << "\u2658" << " ";
+                        cout << "\u2658\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << " " << "\u265E" << " ";
+                        cout <<"\u265E\t" ;
                     }
                 }
                 else if (type == 2)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << " " << "\u2657" << " ";
+                        cout <<"\u2657\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << " " << "\u265D" << " ";
+                        cout <<"\u265D\t";
                     }
                 }
                 else if (type == 3)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << " " << "\u2656" << " ";
+                        cout << "\u2656\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << " " << "\u265C" << " ";
+                        cout << "\u265C\t";
                     }
                 }
                 else if (type == 4)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << " " << "\u2655" << " ";
+                        cout << "\u2655\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << " " << "\u265B" << " ";
+                        cout << "\u265B\t";
                     }
                 }
                 else if (type == 5)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << " " << "\u2654" << " ";
+                        cout <<"\u2654\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << " " << "\u265A" << " ";
+                        cout <<"\u265A\t";
                     }
                 }
 

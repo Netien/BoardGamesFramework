@@ -221,7 +221,7 @@ int R_Stratego::etatPartie(Plateau &plateau){
 bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 {
     if(not plateau.contains(x, y)){
-        //cout << "ici" << endl;
+        
         return false;
     }
     
@@ -237,7 +237,7 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
     if(piece.getJoueur().getId() == 1)
     {
         if(y<6){
-            //cout << "par ici" << endl;
+            
             return false;
         }
     }
@@ -245,7 +245,7 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
   
     if( not (plateau.getCase(x, y).isEmpty()) )
     {
-        //cout << "par la" << endl;
+        
         return false;
     }
     plateau.ajoutPiece(piece);
