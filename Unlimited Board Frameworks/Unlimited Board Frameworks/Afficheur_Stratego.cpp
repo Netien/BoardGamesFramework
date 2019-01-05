@@ -10,6 +10,59 @@
 
 using namespace std;
 
+void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
+{
+
+    cout << endl;
+    for(int y = p.getHauteur()-1; y >= 0; y--)
+    {
+        cout << endl;
+        
+        for(int x = 0; x< p.getLargeur(); x++)
+        {
+            Case c = p.getCase(x, y);
+            
+            if(c.isEmpty())
+            {
+                if(c.getCouleur()==0)
+                {
+                    cout << " " << "\u25A0" << " ";
+                }
+                
+                if(c.getCouleur()==1)
+                {
+                    cout << " " << "\u25A1" << " ";
+                }
+            }
+            else
+            {
+                Piece* p = c.getPiece();
+                int type = p->getType();
+                if (p->getJoueur().getId() != j.getId())
+                {
+                    cout << " ? ";
+                }
+                else if (type < 10)
+                {
+                    cout << " " << type << " ";
+                }
+                else if (type == 10)
+                {
+                    cout << " " << 'M' << " ";
+                }
+                else
+                {
+                    cout << " " << 'B' << " ";
+                }
+                
+            }
+        }
+    }
+    cout << endl;
+    cout << endl;
+}
+
+
 void Afficheur_Stratego::affichageTotal(Plateau & p)
 {
     cout << endl;
@@ -57,10 +110,6 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
     cout << endl;
 }
 
-void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
-{
-    
-}
 
 
 void Afficheur_Stratego::affichageBienvenue()
@@ -112,6 +161,22 @@ std::string Afficheur_Stratego::quelType(int i)
             return "type inconnu !";
             break;
     }
+}
+
+ void Afficheur_Stratego::annoncerCombat(Piece & p1, Piece & p2)
+{
+    cout << "Un combat a lieu entre le " << quelType(p1.getType()) << " de " << p1.getJoueur().getNom() << " et le "
+    << Afficheur_Stratego::quelType(p2.getType()) << " de " << p2.getJoueur().getNom() << endl ;
+}
+
+void Afficheur_Stratego::annoncerVictoire(Piece& p)
+{
+    cout << " La piece " << quelType(p.getType()) << " de " << p.getJoueur().getNom() << " l'emporte." << endl ;
+}
+
+void Afficheur_Stratego::annoncerMatchNul()
+{
+    cout << "Autodestruction mutuelle !" << endl ;
 }
 
 void Afficheur_Stratego::demanderPlacement(Piece& p)

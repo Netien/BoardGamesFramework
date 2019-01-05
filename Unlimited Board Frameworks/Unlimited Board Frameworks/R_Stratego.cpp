@@ -5,6 +5,7 @@
 #include "Plateau.hpp"
 #include "Case.hpp"
 #include "Piece.hpp"
+#include "Afficheur_Stratego.hpp"
 
 
 using namespace std;
@@ -85,7 +86,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
         throw Move_Exception(4);
     //Piece n'appartient pas au joueur courant
     Piece piece = *c.getPiece();
-    cout << "la piece appartient au joueur d'ID " << piece.getJoueur().getId() << endl;
+    cout << endl;
     if(j_tour.getId() != piece.getJoueur().getId())
 	throw Move_Exception(10);
     type_m = piece.getType();
@@ -116,7 +117,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
                 
                 if(j_tour.getId() == piece.getJoueur().getId())
                     {
-                        cout << "C'est le tour du joueur numero " << j_tour.getId() << " qui attaque la piece apartenant au joueur " << piece.getJoueur().getId() <<   endl;
+                        //cout << "C'est le tour du joueur numero " << j_tour.getId() << " qui attaque la piece apartenant au joueur " << piece.getJoueur().getId() <<   endl;
                         
                         
                         throw Move_Exception(8);
@@ -144,24 +145,33 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     Piece p1 = *plateau.getCase(x1, y1).getPiece();
     int t1;
     int t2;
-    if(plateau.getCase(x2, y2).isEmpty()){
+    
+    if(plateau.getCase(x2, y2).isEmpty())
+    {
         //cout<< "On passe ici!" << endl;
         plateau.move(x1, y1, x2, y2);
-	//recordMove(plateau, p1, x2, y2);
+        //recordMove(plateau, p1, x2, y2);
     }
-    else{
-	Piece p2 = *plateau.getCase(x2, y2).getPiece();
-	t1 = p1.getType();
-	t2 = p2.getType();
-	if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
-	    plateau.discard(&p2);
-	    plateau.move(x1, y1, x2, y2);
-	//    recordMove(plateau, p1, x2, y2);
-	}
-	else if(t2 > t1){
-	    plateau.discard(&p1);
-	}
+    else
+    {
+        Piece p2 = *plateau.getCase(x2, y2).getPiece();
+        t1 = p1.getType();
+        t2 = p2.getType();
+        
+        Afficheur_Stratego::annoncerCombat(p1, p2);
+        
+        if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
+            plateau.discard(&p2);
+            plateau.move(x1, y1, x2, y2);
+            Afficheur_Stratego::annoncerVictoire(p1);
+            //recordMove(plateau, p1, x2, y2);
+        }
+        else if(t2 > t1){
+            plateau.discard(&p1);
+            Afficheur_Stratego::annoncerVictoire(p2);
+        }
         else{
+            Afficheur_Stratego::annoncerMatchNul();
             plateau.discard(&p1);
             plateau.discard(&p2);
         }

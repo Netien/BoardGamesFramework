@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
 
     
     Jeu_De_Stratego j{p, r, l_j, afS};
-    j.startTest();
+    j.start();
     
     
                 

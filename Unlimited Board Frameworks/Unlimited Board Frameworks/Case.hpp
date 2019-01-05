@@ -22,6 +22,19 @@ private :
     int m_coordY;
     int m_couleur;
     
+    /*Une case a une couleur. cela sert pour l'affichage et également pour représenter
+     certaines propriétés à tester (exemple : une case bleue dans le Stratego n'est pas franchissable)
+     Convention:
+     1-Blanc
+     2-Bleu
+     3-Rouge
+     4-Jaune
+     5-Violet
+     6-Orange
+     7-Vert
+     8-Noir
+     */
+    
 public :
     static Piece puit;
     Case();

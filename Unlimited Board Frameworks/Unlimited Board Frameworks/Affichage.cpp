@@ -10,7 +10,12 @@
 
 void Affichage::demanderMouvement()
 {
-    std::cout << "Quel déplacement voulez vous faire ? (format \"a1 b2\")" << std::endl;
+    std::cout << "Quel déplacement voulez vous faire ?, (format \"a1 b2\")" << std::endl;
+}
+
+void Affichage::demanderMouvement(Joueur& j)
+{
+    std::cout << "Quel déplacement voulez vous faire, " << j.getNom() << "? (format \"a1 b2\")" << std::endl;
 }
 
 void Affichage::demanderPlacement()

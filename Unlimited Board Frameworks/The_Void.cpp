@@ -7,3 +7,12 @@
 //
 
 #include "The_Void.hpp"
+#include "Joueur.hpp"
+
+namespace The_Void
+
+{
+    
+    const Joueur personne();
+    
+}

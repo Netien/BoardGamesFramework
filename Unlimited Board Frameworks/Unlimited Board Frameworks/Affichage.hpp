@@ -20,6 +20,7 @@ class Affichage
     virtual void affichageErreurPlacement();
 
     virtual void demanderMouvement();
+    virtual void demanderMouvement(Joueur& j);
     virtual void demanderPlacement();
     virtual void demanderPlacement(Piece& p);
     

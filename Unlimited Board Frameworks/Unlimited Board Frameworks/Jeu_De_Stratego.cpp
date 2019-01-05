@@ -80,11 +80,15 @@ void Jeu_De_Stratego::start()
     {
         
         
+        
         bool canPass = false;
+        
+        m_affichage.affichagePartiel(m_plateau, m_plateau.getPiece(i).getJoueur() );
         
         while (canPass == false)
         {
             m_affichage.demanderPlacement(m_plateau.getPiece(i));
+            
             
             try{
                 res = Input_Taker::recupererPlacement();
@@ -106,7 +110,7 @@ void Jeu_De_Stratego::start()
                     m_affichage.affichageErreurPlacement();
                 }
                 
-                m_affichage.affichageTotal(m_plateau);
+            
                 
                 
             }
@@ -128,15 +132,21 @@ void Jeu_De_Stratego::start()
     while(m_regles.etatPartie(m_plateau)==0)
     {
         
-        Joueur currentPlayer = m_listJoueurs[cptTour%2];
-        cptTour++;
+        Joueur currentPlayer;
+        
         
         bool canPass = false;
+        
         while (canPass == false)
         {
-            try{
-                m_affichage.affichageTotal(m_plateau);
-                m_affichage.demanderMouvement();
+            try
+            {
+                
+                
+                currentPlayer = m_listJoueurs[cptTour%2];
+                m_affichage.affichagePartiel(m_plateau, currentPlayer);
+                cout << "Joueur courant :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
+                m_affichage.demanderMouvement(currentPlayer);
                 std::vector<string> res = Input_Taker::recupererMouvement();
                 
                 char c1 = res[0][0];
@@ -150,8 +160,10 @@ void Jeu_De_Stratego::start()
                 int valY2 = std::stoi(strY2) - 1;
                 if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
                 {
-                   m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
+                    m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
                 }
+                
+                cptTour++;
             }
             catch(Input_Exception iE)
             {
@@ -208,7 +220,7 @@ void Jeu_De_Stratego::startTest()
     {
         for ( j = 9; j>5; j--)
         {
-            cout << "Allo" << endl;
+            //cout << "Allo" << endl;
             m_regles.placePiece(m_plateau, m_plateau.getPiece(i), ind, j);
             
             i++;
@@ -243,8 +255,8 @@ void Jeu_De_Stratego::startTest()
                 
                 m_affichage.affichageTotal(m_plateau);
                 currentPlayer = m_listJoueurs[cptTour%2];
-                cout << "Joueur courent :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
-                m_affichage.demanderMouvement();
+                //cout << "Joueur courent :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
+                m_affichage.demanderMouvement(currentPlayer);
                 std::vector<string> res = Input_Taker::recupererMouvement();
                 
                 char c1 = res[0][0];

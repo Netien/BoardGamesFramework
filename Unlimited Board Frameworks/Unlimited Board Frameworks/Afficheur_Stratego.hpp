@@ -20,7 +20,10 @@ public :
     void affichagePartiel(Plateau & p, Joueur j);
     void affichageBienvenue();
     void demanderPlacement(Piece& p);
-    std::string quelType(int i);
+    static std::string quelType(int i);
+    static void annoncerCombat(Piece & p1, Piece & p2);
+    static void annoncerVictoire(Piece & p);
+    static void annoncerMatchNul();
 };
 
 

@@ -19,9 +19,9 @@ Piece::Piece(int type, Joueur &j) : m_joueur(&j), m_coordX(-1),	m_coordY(-1), m_
     id++;
 }
 
-void Piece::promotion(int n_type){ m_type = n_type; };
+void Piece::promotion(int n_type){ m_type = n_type;}
 
-int Piece::getId(){ return p_id; };
+int Piece::getId(){ return p_id; }
 
 int Piece::getX(){ return m_coordX; }
 
