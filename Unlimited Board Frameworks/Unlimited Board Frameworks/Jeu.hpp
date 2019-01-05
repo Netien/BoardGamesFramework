@@ -11,8 +11,6 @@
 #include "Regles.hpp"
 #include "Joueur.hpp"
 #include "Plateau.hpp"
-#include "Case.hpp"
-#include "Piece.hpp"
 #include "Affichage.hpp"
 #include <stdio.h>
 #include <vector>
@@ -26,6 +24,7 @@ protected :
     Affichage & m_affichage;    
     
 public :
+    static Joueur personne;
     virtual void start()=0;
     Jeu(Plateau &p, Regles &r, std::vector<Joueur> &listJoueurs, Affichage &a);
     

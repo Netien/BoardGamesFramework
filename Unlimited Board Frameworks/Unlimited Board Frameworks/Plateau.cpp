@@ -10,6 +10,8 @@
 
 using namespace std;
 
+
+
 Plateau::Plateau(const int largeur, const int hauteur) : m_largeur(largeur), m_hauteur(hauteur) {
     int x = 0;
     int y = 0;
@@ -50,24 +52,41 @@ Case& Plateau::getCase(int x, int y){ return m_damier[x][y]; };
 
 Piece& Plateau::getPiece(int p_id){ return m_listePieces[p_id]; }
 
+const unsigned long Plateau::getLongListePieces() const
+{
+    return m_listePieces.size();
+}
+
 void Plateau::move(int x1, int y1, int x2, int y2){
-    Piece p = getCase(x1, y1).getPiece();
-    discard(p);
+    Piece * p = getCase(x1, y1).getPiece();
     dispatch(p, x2, y2);
+    discard(x1, y1);
 }
 
-void Plateau::discard(Piece &p){
-    if(p.getX() != -1 && p.getY() != -1)
-			getCase(p.getX(), p.getY() ).setPiece(NULL);
-    p.move(-1, -1);
+void Plateau::discard(int x, int y){
+    getCase(x, y).setPiece(&Case::puit);
 }
 
-void Plateau::dispatch(Piece &p, int x, int y){
-    getCase(x, y).setPiece(&p);
-    p.move(x, y);
+void Plateau::discard(Piece *p){
+    if(p->getX() != -1 && p->getY() != -1)
+        getCase(p->getX(), p->getY() ).setPiece(&Case::puit);
+    p->move(-1, -1);
+}
+
+void Plateau::dispatch(Piece* p, int x, int y){
+    getCase(x, y).setPiece(p);
+    p->move(x, y);
 }
 
 void Plateau::ajoutPiece(Piece &piece){
+    for (Piece& p : m_listePieces)
+    {
+        if(p.getId()==piece.getId())
+        {
+            throw runtime_error("piece deja presente dans plateau");
+        }
+            
+    }
     m_listePieces.push_back(piece);
 }
 

@@ -35,7 +35,7 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
             }
             else
             {
-                int type = c.getPiece().getType();
+                int type = c.getPiece()->getType();
                 
                 if (type < 10)
                 {
@@ -43,11 +43,11 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
                 }
                 else if (type == 10)
                 {
-                    cout << 'M' << type << " ";
+                    cout << " " << 'M' << " ";
                 }
                 else
                 {
-                    cout << 'B' << type << " ";
+                    cout << " " << 'B' << " ";
                 }
                 
             }
@@ -57,12 +57,65 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
     cout << endl;
 }
 
+void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
+{
+    
+}
+
+
 void Afficheur_Stratego::affichageBienvenue()
 {
     cout << "Bienvenue dans le Stratégo !" << endl;
 }
 
-void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
+std::string Afficheur_Stratego::quelType(int i)
 {
-    
+    switch (i) {
+        case 0 :
+            return "drapeau";
+            break;
+        case 1 :
+            return "espion";
+            break;
+        case 2 :
+            return "eclaireur";
+            break;
+        case 3 :
+            return "demineur";
+            break;
+        case 4 :
+            return "sergeant";
+            break;
+        case 5 :
+            return "lieutenant";
+            break;
+        case 6 :
+            return "capitaine";
+            break;
+        case 7 :
+            return "commandant";
+            break;
+        case 8 :
+            return "colonel";
+            break;
+        case 9 :
+            return "général";
+            break;
+        case 10 :
+            return "maréchal";
+            break;
+        case 11 :
+            return "bombe";
+            break;
+            
+        default:
+            return "type inconnu !";
+            break;
+    }
 }
+
+void Afficheur_Stratego::demanderPlacement(Piece& p)
+{
+    cout << "ou voulez vous placer le pion " << quelType(p.getType())<< ", " << p.getJoueur().getNom() << " ?" << endl;
+}
+

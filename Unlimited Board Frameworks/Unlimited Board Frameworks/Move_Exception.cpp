@@ -29,6 +29,6 @@ Move_Exception::Move_Exception(int type) : numero(type){
 
 Move_Exception::~Move_Exception() throw (){}
 
-const char* Move_Exception::what(){
+const char* Move_Exception::what() {
     return msg.c_str();
 }

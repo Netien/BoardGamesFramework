@@ -17,8 +17,12 @@ class Affichage
     virtual void affichageTotal(Plateau & p)=0;
     virtual void affichagePartiel(Plateau & p, Joueur j)=0;
     virtual void affichageBienvenue()=0;
-    void demanderMouvement();
-    void demanderPlacement();
+    virtual void affichageErreurPlacement();
+
+    virtual void demanderMouvement();
+    virtual void demanderPlacement();
+    virtual void demanderPlacement(Piece& p);
+    
 };
 
 #endif /* Affichage_hpp */

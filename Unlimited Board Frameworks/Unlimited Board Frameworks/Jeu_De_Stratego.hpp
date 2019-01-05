@@ -21,8 +21,9 @@ private :
     
 public :
     Jeu_De_Stratego( Plateau_De_Stratego &p, R_Stratego &r, std::vector<Joueur> &v, Afficheur_Stratego &a);
-    void remplirListePieces();
+    void remplirListePieces() ;
     void start();
+    void startTest();
 };
 
 #endif /* Jeu_De_Stratego_hpp */

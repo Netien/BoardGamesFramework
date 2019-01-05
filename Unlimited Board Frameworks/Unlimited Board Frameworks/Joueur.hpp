@@ -19,12 +19,14 @@ class Joueur{
 private :
     std::string m_nom;
     int m_score;
-    int const m_id;
+    int m_id;
     static int id;
     
 public :
+    Joueur();
     Joueur(std::string nom);
     int getId();
+    std::string getNom();
 };
 
 
