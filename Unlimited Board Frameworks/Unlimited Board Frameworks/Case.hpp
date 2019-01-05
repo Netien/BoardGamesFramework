@@ -25,14 +25,14 @@ private :
     /*Une case a une couleur. cela sert pour l'affichage et également pour représenter
      certaines propriétés à tester (exemple : une case bleue dans le Stratego n'est pas franchissable)
      Convention:
-     1-Blanc
-     2-Bleu
-     3-Rouge
-     4-Jaune
-     5-Violet
-     6-Orange
-     7-Vert
-     8-Noir
+     0-Blanc
+     1-Bleu
+     2-Rouge
+     3-Jaune
+     4-Violet
+     5-Orange
+     6-Vert
+     7-Noir
      */
     
 public :

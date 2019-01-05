@@ -33,8 +33,8 @@ using namespace std;
 //    positions.at(id).at(idx) = plateau.getCase(x, y);
 //};
   
-R_Stratego::R_Stratego() :
-    positions(vector<vector<Case> >(80, vector<Case>(4, Case()) ) )
+R_Stratego::R_Stratego()
+    //positions(vector<vector<Case> >(80, vector<Case>(4, Case()) ) )
 {};
   
 /* Relation valeur-identite (pieces):
@@ -67,38 +67,38 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
     int j;
     //Sortie du plateau
     if( not (plateau.contains(x1, y1))){
-        throw Move_Exception(1);
+        throw Stratego_Move_Exception(1);
     }
 
     if ( not (plateau.contains(x2, y2))){
-        throw Move_Exception(1);
+        throw Stratego_Move_Exception(1);
     }
  
     //Déplacement non orthogonal
     if(x1 != x2 && y1 != y2)
-        throw Move_Exception(2);
+        throw Stratego_Move_Exception(2);
     //Mouvement sur la meme case
     if(x1 == x2 && y1 == y2)
-        throw Move_Exception(3);
+        throw Stratego_Move_Exception(3);
     //Case de depart vide
     c = plateau.getCase(x1, y1);
     if(c.isEmpty())
-        throw Move_Exception(4);
+        throw Stratego_Move_Exception(4);
     //Piece n'appartient pas au joueur courant
     Piece piece = *c.getPiece();
     cout << endl;
     if(j_tour.getId() != piece.getJoueur().getId())
-	throw Move_Exception(10);
+	throw Stratego_Move_Exception(10);
     type_m = piece.getType();
     //Piece ne peut pas bouger
     if(type_m == 0 || type_m == 11 )
-        throw Move_Exception(5);
+        throw Stratego_Move_Exception(5);
     //On passe sur les 2 memes case pendant 5 coups
     //if(!count_Dif_Pos_Ok(piece, c))
-    //    throw Move_Exception(11);
+    //    throw Stratego_Move_Exception(11);
     //distance de + d'une case interdit 
     if(type_m != 2 && abs(x1-x2+y1-y2) != 1)
-	throw Move_Exception(6);
+	throw Stratego_Move_Exception(6);
     i = x2;
     j = y2;
     while(i != x1 || j != y1){
@@ -106,7 +106,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
         //Case inutiliable
         if(c.getCouleur() == 1)
         {
-            throw Move_Exception(7);
+            throw Stratego_Move_Exception(7);
         }
         //Case d'arrivée occupée par piece du joueur actif
         if(i == x2 && j == y2){
@@ -120,13 +120,13 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
                         //cout << "C'est le tour du joueur numero " << j_tour.getId() << " qui attaque la piece apartenant au joueur " << piece.getJoueur().getId() <<   endl;
                         
                         
-                        throw Move_Exception(8);
+                        throw Stratego_Move_Exception(8);
                     }
             }
         }
             //Case intermediaire non-vide
             if((not c.isEmpty()) && (not(i == x2 && j == y2)) && (not(i == x1 && j == y1)))
-                throw Move_Exception(9);
+                throw Stratego_Move_Exception(9);
               
             //incrémentation/décrémentation adaptée
             if(i > x1)

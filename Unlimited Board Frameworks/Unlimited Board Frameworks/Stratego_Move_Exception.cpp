@@ -1,6 +1,6 @@
-#include "Move_Exception.hpp"
+#include "Stratego_Move_Exception.hpp"
 
-Move_Exception::Move_Exception(int type) : numero(type){
+Stratego_Move_Exception::Stratego_Move_Exception(int type) : numero(type){
     switch(numero){
     case 1: msg = "Sortie du plateau";
 	break;
@@ -27,8 +27,8 @@ Move_Exception::Move_Exception(int type) : numero(type){
     }
 }
 
-Move_Exception::~Move_Exception() throw (){}
+Stratego_Move_Exception::~Stratego_Move_Exception() throw (){}
 
-const char* Move_Exception::what() {
+const char* Stratego_Move_Exception::what() const throw() {
     return msg.c_str();
 }

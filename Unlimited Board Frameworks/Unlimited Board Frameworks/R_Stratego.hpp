@@ -9,7 +9,7 @@
 #ifndef R_Stratego_hpp
 #define R_Stratego_hpp
 
-#include "Move_Exception.hpp"
+#include "Stratego_Move_Exception.hpp"
 #include "Regles.hpp"
 #include "Piece.hpp"
 #include "Case.hpp"
@@ -19,7 +19,7 @@
 class R_Stratego : public Regles
 {
 private:
-    std::vector<std::vector<Case> > positions;
+    //std::vector<std::vector<Case> > positions;
     //virtual bool count_Dif_Pos_Ok(Piece &piece, Case &c);
     //virtual void recordMove(Plateau &plateau, Piece &piece, int x, int y);
     
