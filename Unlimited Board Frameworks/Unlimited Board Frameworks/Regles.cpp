@@ -77,7 +77,7 @@ void Regles::checkStartingBoxEmpty(Plateau& plateau, int x, int y)
 void Regles::checkOwner(Plateau& plateau, Joueur& j_tour, int x, int y)
 {
     Case c = plateau.getCase(x, y);
-    Piece piece = *c.getPiece();
+    Piece piece = c.getPiece();
     if(j_tour.getId() != piece.getJoueur().getId())
         throw Move_Exception("Cette pièce ne vous appartient pas!", "Erreur de sélection");
     
@@ -134,7 +134,7 @@ void Regles::checkPath(Plateau& plateau, Joueur j_tour, int x1, int y1, int x2, 
             
             if(not c.isEmpty())
             {
-                piece = *c.getPiece();
+                piece = c.getPiece();
                 
                 if(j_tour.getId() == piece.getJoueur().getId())
                 {

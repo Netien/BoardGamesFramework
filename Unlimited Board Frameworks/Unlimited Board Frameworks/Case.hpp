@@ -41,11 +41,11 @@ public :
     Case(int coordX, int coordY);
     Case(int coordX, int coordY, int couleur);
     
-    Piece* getPiece();
+    Piece& getPiece();
     int getCouleur();
     int getX();
     int getY();
-    void setPiece(Piece *p);
+    void setPiece(Piece &p);
     void setCouleur(int coul);
     void setCoord(int x, int y);
     bool isEmpty();

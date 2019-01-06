@@ -128,8 +128,9 @@ void Jeu_De_Stratego::start()
     }
     
     int cptTour =0;
+    int etat = m_regles.etatPartie(m_plateau);
     
-    while(m_regles.etatPartie(m_plateau)==0)
+    while(etat==0)
     {
         
         Joueur currentPlayer;
@@ -161,22 +162,33 @@ void Jeu_De_Stratego::start()
                 if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
                 {
                     m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
+		    canPass = true;
                 }
-                
+		//Debug
+		//cout << "Coup valide: " << canPass << endl;
+		
                 cptTour++;
             }
             catch(Input_Exception iE)
             {
-                cerr << "ERREUR D'INPUT : " << iE.what() << endl;
-                canPass = false;
+                cout << "ERREUR D'INPUT : " << iE.what() << endl;
+		//Debug
+		//cout << "Coup valide: " << canPass << endl;
+		
             }
             
             catch(Move_Exception mE)
             {
-                cerr << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
-                canPass = false;
+                cout << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
+		//Debug
+		//cout << "Coup valide: " << canPass << endl;
+		
             }
+		
         }
+	etat = m_regles.etatPartie(m_plateau);
+	//Debug
+	//cout << "Etat de la partie: " << etat << endl;
         
     }
     
@@ -265,6 +277,7 @@ void Jeu_De_Stratego::startTest()
                 if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
                 {
                     m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
+		    canPass = true;
                 }
                 
                 cptTour++;

@@ -36,8 +36,8 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
             }
             else
             {
-                int type = c.getPiece()->getType();
-                Joueur proprietaire = c.getPiece()->getJoueur();
+                int type = c.getPiece().getType();
+                Joueur proprietaire = c.getPiece().getJoueur();
                 
                 if (type == 0)
                 {

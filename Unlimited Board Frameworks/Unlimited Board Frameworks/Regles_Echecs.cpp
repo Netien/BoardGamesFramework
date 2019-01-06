@@ -30,7 +30,7 @@ int Regles_Echecs::checkMove(Plateau& plateau, int x1, int y1, int x2, int y2, J
     //Piece n'appartient pas au joueur courant
     checkOwner(plateau, j_tour, x1, y1);
     
-    int type = plateau.getCase(x1, y1).getPiece()->getType();
+    int type = plateau.getCase(x1, y1).getPiece().getType();
     
     if (type == 5)//Si c'est un roi
     {
@@ -98,7 +98,7 @@ int Regles_Echecs::checkMove(Plateau& plateau, int x1, int y1, int x2, int y2, J
 
 void Regles_Echecs::move(Plateau& plateau, int x1, int y1, int x2, int y2)
 {
-    Piece *p1 = plateau.getCase(x1, y1).getPiece();
+    Piece p1 = plateau.getCase(x1, y1).getPiece();
     int t1;
     int t2;
     
@@ -108,7 +108,7 @@ void Regles_Echecs::move(Plateau& plateau, int x1, int y1, int x2, int y2)
     }
     else
     {
-        Piece *p2 = plateau.getCase(x2, y2).getPiece();
+        Piece p2 = plateau.getCase(x2, y2).getPiece();
         
             plateau.discard(p2);
             plateau.move(x1, y1, x2, y2);
@@ -155,7 +155,7 @@ bool Regles_Echecs::placePiece(Plateau &plateau, Piece &piece, int x, int y)
         return false;
     }
     
-    plateau.dispatch(&piece, x, y);
+    plateau.dispatch(piece, x, y);
     
     
     return true;

@@ -61,7 +61,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
     //Essai de déplacer une piece par nature statique
     staticPiece(plateau, x1, y1);
 
-    if(plateau.getCase(x1, y1).getPiece()->getType() != 2)//pour toute piece autre que l'éclaireur...
+    if(plateau.getCase(x1, y1).getPiece().getType() != 2)//pour toute piece autre que l'éclaireur...
     {
         //distance de + d'une case interdit.
         checkMove1Box(x1, y1, x2, y2);
@@ -73,7 +73,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
 };
 
 void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
-    Piece *p1 = plateau.getCase(x1, y1).getPiece();
+    Piece &p1 = plateau.getCase(x1, y1).getPiece();
     int t1;
     int t2;
     
@@ -83,21 +83,21 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     }
     else
     {
-        Piece *p2 = plateau.getCase(x2, y2).getPiece();
-        t1 = p1->getType();
-        t2 = p2->getType();
+        Piece &p2 = plateau.getCase(x2, y2).getPiece();
+        t1 = p1.getType();
+        t2 = p2.getType();
         
-        Afficheur_Stratego::annoncerCombat(*p1, *p2);
+        Afficheur_Stratego::annoncerCombat(p1, p2);
         
         if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
             plateau.discard(p2);
             plateau.move(x1, y1, x2, y2);
-            Afficheur_Stratego::annoncerVictoire(*p1);
+            Afficheur_Stratego::annoncerVictoire(p1);
             //recordMove(plateau, p1, x2, y2);
         }
         else if(t2 > t1){
             plateau.discard(p1);
-            Afficheur_Stratego::annoncerVictoire(*p2);
+            Afficheur_Stratego::annoncerVictoire(p2);
         }
         else{
             Afficheur_Stratego::annoncerMatchNul();
@@ -116,8 +116,10 @@ int R_Stratego::etatPartie(Plateau &plateau){
     int max = plateau.nbPieces();
     while(idx < max && not (rFlag && bFlag && bCanPlay && rCanPlay) ){
 	Piece &piece = plateau.getPiece(idx);
+	//Debug
+	//cout << "Piece n°: " << piece.getId() << " ; position: " << piece.getX() << ", " << piece.getY() << " ; type: " << piece.getType() << endl;
 	if(piece.getX() == -1 && piece.getY() == -1){}
-        if(piece.getType() == 0){
+        else if(piece.getType() == 0){
 	    if(piece.getJoueur().getId() == 0)
 		bFlag = true;
 	    else
@@ -179,7 +181,7 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
         return false;
     }
     
-    plateau.dispatch(&piece, x, y);
+    plateau.dispatch(piece, x, y);
 
     
     return true;
@@ -188,8 +190,8 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 
 void R_Stratego::staticPiece(Plateau &plateau, int x, int y)
 {
-    Case c = plateau.getCase(x, y);
-    Piece piece = *c.getPiece();
+    Case &c = plateau.getCase(x, y);
+    Piece &piece = c.getPiece();
     int type_m = piece.getType();
     //Piece ne peut pas bouger
     if(type_m == 0 || type_m == 11 )
