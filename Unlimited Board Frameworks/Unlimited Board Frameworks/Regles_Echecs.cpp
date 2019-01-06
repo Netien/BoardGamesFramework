@@ -58,34 +58,10 @@ int Regles_Echecs::checkMove(Plateau& plateau, int x1, int y1, int x2, int y2, J
     }
     else if (type == 0)//Si c'est un pion (EN COURS)
     {
-        checkOrthogonal(x1, y1, x2, y2);
-        //checkMove1Box(x1, y1, x2, y2);
         
-        if(j_tour.getId()==0)
-        {
-            if(y1 == 1)//on regarde si le pion est a sa position de départ (dans ce cas il peut avancer de 2 cases)
-            {
-                checkDistanceFromStartLessThanN(2, x1, y1, x2, y2);
-            }
-            else{
-                checkMove1Box(x1, y1, x2, y2);
-            }
-            checkUpward(x1, y1, x2, y2);
-        }
-        if(j_tour.getId()==1)
-        {
-            if(y1 == 6)//on regarde si le pion est a sa position de départ (dans ce cas il peut avancer de 2 cases)
-            {
-                checkDistanceFromStartLessThanN(2, x1, y1, x2, y2);
-            }
-            else{
-                checkMove1Box(x1, y1, x2, y2);
-            }
+        checkPawnMovement(plateau, j_tour, x1, y1, x2, y2);
 
-            checkDownward(x1, y1, x2, y2);
-        }
     }
-    
     if(type != 1) //Si c'est autre chose qu'un cavalier
     {
         //On regarde si le chemin est libre
@@ -142,7 +118,7 @@ bool Regles_Echecs::placePiece(Plateau &plateau, Piece &piece, int x, int y)
     
     if(piece.getJoueur().getId() == 1)
     {
-        if(y<6){
+        if(y<plateau.getHauteur()-2){
             
             return false;
         }
@@ -159,4 +135,105 @@ bool Regles_Echecs::placePiece(Plateau &plateau, Piece &piece, int x, int y)
     
     
     return true;
+}
+
+void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, int y1, int x2, int y2)
+{
+    Case c = plateau.getCase(x1, y1);
+    
+    //
+    
+    if(j_tour.getId()==0)//Pour le joueur 1
+    {
+        if (x1==x2 and y2 == y1+1)//Si on essaye d'avancer d'une case tout droit
+        {
+        
+            c = plateau.getCase(x1, y1+1);
+            if(not(c.isEmpty()))//Si la case est occupée, peut importe par quelle piece, il ne peut avancer(pion ne peut manger en avançant).
+               {
+                   throw Move_Exception("Case occupée, vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+               }
+        }
+        else if(x2 == x1 and y2 == y1+2)//Si on essaye d'avancer de 2 cases tout droit
+        {
+            c = plateau.getCase(x1, y1+2);
+            if(not(c.isEmpty()))//Si la case est occupée, peut importe par quelle piece, il ne peut avancer(pion ne peut manger en avançant).
+            {
+                throw Move_Exception("Case occupée, vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+            if(y1 != 1)//Si le pion n'est pas en position de départ, impossible.
+            {
+                throw Move_Exception("Ce pion ne peut plus avancer de 2 cases !", "Erreur de déplacement");
+            }
+            
+        }
+
+        else if(x2 == x1-1 and y2 == y1+1)//Si on essaye d'accéder à la case adjacente en diagonale gauche
+        {
+            c = plateau.getCase(x1-1, y1+1);
+            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            {
+                throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+        }
+        else if(x2 == x1+1 and y2 == y1+1)//Si on essaye d'accéder à la case adjacente en diagonale droite
+        {
+            c = plateau.getCase(x1+1, y1+1);
+            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            {
+                throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+        }
+        else
+        {
+            throw Move_Exception("Déplacement impossible pour un pion", "Erreur de déplacement");
+        }
+        
+    }
+    
+    
+    if(j_tour.getId()==1)//Pour le joueur 2
+    {
+        if (x1==x2 and y2 == y1-1 )//Si on essaye d'avancer d'une case tout droit
+        {
+            
+            c = plateau.getCase(x1, y1-1);
+            if(not(c.isEmpty()))//Si la case est occupée, peut importe par quelle piece, il ne peut avancer(pion ne peut manger en avançant).
+            {
+                throw Move_Exception("Case occupée, vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+        }
+        else if(x2 == x1 and y2 == y1-2)//Si on essaye d'avancer de 2 cases tout droit
+        {
+            c = plateau.getCase(x1, y1-2);
+            if(not(c.isEmpty()))//Si la case est occupée, peut importe par quelle piece, il ne peut avancer(pion ne peut manger en avançant).
+            {
+                throw Move_Exception("Case occupée, vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+            if(y1 != plateau.getHauteur()-2)//Si le pion n'est pas en position de départ, impossible.
+            {
+                throw Move_Exception("Ce pion ne peut plus avancer de 2 cases !", "Erreur de déplacement");
+            }
+            
+        }
+        
+        else if(x2 == x1-1 and y2 == y1-1)//Si on essaye d'accéder à la case adjacente en diagonale gauche
+        {
+            c = plateau.getCase(x1-1, y1-1);
+            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            {
+                throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+        }
+        else if(x2 == x1+1 and y2 == y1-1)//Si on essaye d'accéder à la case adjacente en diagonale droite
+        {
+            c = plateau.getCase(x1+1, y1+1);
+            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            {
+                throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+            }
+        }
+
+    }
+    
 }
