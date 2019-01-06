@@ -14,6 +14,8 @@
 
 class Regles_Echecs : public Regles
 {
+    protected :
+    void checkPawnMovement(Plateau& plateau, Joueur j, int x1, int y1, int x2, int y2);
     public :
     Regles_Echecs();
     int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour);
