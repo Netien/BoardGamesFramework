@@ -8,16 +8,13 @@ STRATEGO= Plateau_De_Stratego.o R_Stratego.o Afficheur_Stratego.o Jeu_De_Strateg
 ECHECS= Plateau_Echecs.o Regles_Echecs.o Afficheur_Echecs.o Jeu_Echecs.o  
 
 
-all: main test
+all: main
 
 clean :
-	rm main test main.o main_test.o $(OBJ_FILES) $(STRATEGO) $(ECHECS) *.~ *.gch
+	rm main main.o  $(OBJ_FILES) $(STRATEGO) $(ECHECS) *.~ *.gch
 
 main : $(OBJ_FILES) $(STRATEGO) $(ECHECS) main.o
 	$(CC) -o main $(OBJ_FILES) $(STRATEGO) $(ECHECS) main.o $(LIBS)
-
-test: $(OBJ_FILES) $(STRATEGO) main_test.o
-	$(CC) -o test $(OBJ_FILES) $(STRATEGO) main_test.o $(LIBS)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<

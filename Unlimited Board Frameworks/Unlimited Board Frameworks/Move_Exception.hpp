@@ -15,7 +15,7 @@ public:
     virtual ~Move_Exception() throw();
     
     Move_Exception(std::string phrase="Une erreur de déplacement a eu lieu", std::string type= "Erreur de déplacement") throw()
-    :m_type(type),msg(phrase)
+    : msg(phrase), m_type(type)
     {}
     
     virtual const char* what() const throw()
