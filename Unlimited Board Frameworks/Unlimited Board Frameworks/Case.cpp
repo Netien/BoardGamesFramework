@@ -20,7 +20,7 @@ Case::Case(int coordX, int coordY) : m_piece(&(Case::puit)), m_coordX(coordX), m
 Case::Case(int coordX, int coordY, int couleur) : m_piece(&Case::puit), m_coordX(coordX), m_coordY(coordY), m_couleur(couleur)
 {}
 
-Piece* Case::getPiece() { return m_piece; }
+Piece& Case::getPiece() { return *(m_piece); }
 
 int Case::getCouleur() { return m_couleur; }
 
@@ -28,8 +28,8 @@ int Case::getX(){ return m_coordX; }
 
 int Case::getY(){ return m_coordY; }
 
-void Case::setPiece(Piece *p){
-    m_piece = p;
+void Case::setPiece(Piece &p){
+    m_piece = &(p);
 }
 
 void Case::setCouleur(int coul) {

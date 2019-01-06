@@ -84,7 +84,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
     if(c.isEmpty())
         throw Stratego_Move_Exception(4);
     //Piece n'appartient pas au joueur courant
-    Piece piece = *c.getPiece();
+    Piece piece = c.getPiece();
     cout << endl;
     if(j_tour.getId() != piece.getJoueur().getId())
 	throw Stratego_Move_Exception(10);
@@ -112,7 +112,7 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
             
             if(not c.isEmpty())
             {
-                piece = *c.getPiece();
+                piece = c.getPiece();
                 
                 if(j_tour.getId() == piece.getJoueur().getId())
                     {
@@ -141,7 +141,6 @@ int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joue
 };
 
 void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
-    Piece *p1 = plateau.getCase(x1, y1).getPiece();
     int t1;
     int t2;
     
@@ -153,26 +152,26 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     }
     else
     {
-        Piece *p2 = plateau.getCase(x2, y2).getPiece();
-        t1 = p1->getType();
-        t2 = p2->getType();
+        t1 = plateau.getCase(x1, y1).getPiece().getType();
+        t2 = plateau.getCase(x2, y2).getPiece().getType();
         
-        Afficheur_Stratego::annoncerCombat(*p1, *p2);
+        Afficheur_Stratego::annoncerCombat(plateau.getCase(x1, y1).getPiece(),
+					   plateau.getCase(x2, y2).getPiece());
         
         if((t1 == 1 && t2 == 10)||(t1 == 3 && t2 == 11)||(t1 > t2)){
-            plateau.discard(p2);
+            plateau.discard(plateau.getCase(x2, y2).getPiece());
             plateau.move(x1, y1, x2, y2);
-            Afficheur_Stratego::annoncerVictoire(*p1);
+            Afficheur_Stratego::annoncerVictoire(plateau.getCase(x2, y2).getPiece());
             //recordMove(plateau, p1, x2, y2);
         }
         else if(t2 > t1){
-            plateau.discard(p1);
-            Afficheur_Stratego::annoncerVictoire(*p2);
+            plateau.discard(plateau.getCase(x1, y1).getPiece());
+            Afficheur_Stratego::annoncerVictoire(plateau.getCase(x2, y2).getPiece());
         }
         else{
             Afficheur_Stratego::annoncerMatchNul();
-            plateau.discard(p1);
-            plateau.discard(p2);
+            plateau.discard(plateau.getCase(x1, y1).getPiece());
+            plateau.discard(plateau.getCase(x2, y2).getPiece());
         }
     }
 };
@@ -186,6 +185,8 @@ int R_Stratego::etatPartie(Plateau &plateau){
     int max = plateau.nbPieces();
     while(idx < max && not (rFlag && bFlag && bCanPlay && rCanPlay) ){
 	Piece &piece = plateau.getPiece(idx);
+	//Debug
+	//cout << "Piece n°: " << piece.getId() << " ; position: " << piece.getX() << ", " << piece.getY() << " ; type: " << piece.getType() << endl;
 	if(piece.getX() == -1 && piece.getY() == -1){}
         else if(piece.getType() == 0){
 	    if(piece.getJoueur().getId() == 0)
@@ -248,9 +249,7 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
         //cout << "par la" << endl;
         return false;
     }
-    plateau.ajoutPiece(piece);
-    plateau.dispatch(&piece, x, y);
-
+    plateau.dispatch(piece, x, y);
     
     return true;
 }

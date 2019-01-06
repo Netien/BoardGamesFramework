@@ -10,7 +10,7 @@
 #include "Jeu.hpp"
 int Piece::id = 0;
 
-Piece::Piece() : m_joueur(&(Jeu::personne)), m_coordX(-1),	m_coordY(-1), m_type(-1), p_id(id)
+Piece::Piece() : m_joueur(&(Jeu::personne)), m_coordX(-1),	m_coordY(-1), m_type(-1), p_id(-1)
 {
 }
 

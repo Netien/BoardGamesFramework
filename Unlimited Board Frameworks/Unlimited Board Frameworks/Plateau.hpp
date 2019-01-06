@@ -20,7 +20,7 @@ protected :
     int const m_largeur;
     int const m_hauteur;
     std::vector<std::vector<Case> > m_damier;
-    std::vector<Piece*> m_listePieces;
+    std::vector<Piece> m_listePieces;
     
 public :
     
@@ -36,8 +36,8 @@ public :
 
     void move(int x1, int y1, int x2, int y2);
     void discard(int x, int y);
-    void discard(Piece* p);
-    void dispatch(Piece* p, int x, int y);
+    void discard(Piece& p);
+    void dispatch(Piece& p, int x, int y);
     void addPiece(Piece &piece);
     int nbPieces();
     
