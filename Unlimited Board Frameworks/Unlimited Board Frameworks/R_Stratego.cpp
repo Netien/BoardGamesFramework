@@ -10,29 +10,8 @@
 
 using namespace std;
 
-//bool R_Stratego::count_Dif_Pos_Ok(Piece &piece, Case &c){
-//    int id = piece.getId();
-//    int idx = 1;
-//    while(idx < 5){
-//	if(c == positions.at(id).at(idx) ||
-//	   positions.at(id).at(0) == positions.at(id).at(id) ||
-//	   positions.at(id).at(idx) != Case() )
-//	    return false;
-//	idx++;
-//    }
-//    return true;
-//};
-//
-//void R_Stratego::recordMove(Plateau &plateau, Piece &piece, int x, int y){
-//    int idx = 3;
-//    int id = piece.getId();
-//    while(idx > 0){
-//	positions.at(id).at(idx) = positions.at(id).at(idx-1);
-//	idx--;
-//    }
-//    positions.at(id).at(idx) = plateau.getCase(x, y);
-//};
-  
+
+
 R_Stratego::R_Stratego()
 {};
   
@@ -60,85 +39,36 @@ R_Stratego::R_Stratego()
  * Retourne une autre valeur si le mouvement est interdit.
  */
 int R_Stratego::checkMove(Plateau &plateau, int x1, int y1, int x2, int y2, Joueur j_tour){
-    Case c;
-    int type_m;
-    int i;
-    int j;
+
+    
+    
     //Sortie du plateau
-    if( not (plateau.contains(x1, y1))){
-        throw Stratego_Move_Exception("Sortie du plateau!", "Erreur de déplacement ");
-    }
+    checkOutOfBounds(plateau, x1, y1);
+    checkOutOfBounds(plateau, x2, y2);
  
     //Déplacement non orthogonal
-    if(x1 != x2 && y1 != y2)
-         throw Stratego_Move_Exception("Déplacement non orthogonal!", "Erreur de déplacement");
+    checkOrthogonal(x1, y1, x2, y2);
+    
     //Mouvement sur la meme case
-    if(x1 == x2 && y1 == y2)
-         throw Stratego_Move_Exception("La piece n'a pas bougé!", "Erreur de déplacement");
+    checkDidntMove(x1, y1, x2, y2);
+    
     //Case de depart vide
-    
-    c = plateau.getCase(x1, y1);
-    
-    if(c.isEmpty())
-         throw Stratego_Move_Exception("La case de départ est vide!", "Erreur de sélection");
+    checkStartingBoxEmpty(plateau, x1, y1);
     
     //Piece n'appartient pas au joueur courant
-    Piece piece = *c.getPiece();
+    checkOwner(plateau, j_tour, x1, y1);
     
-    if(j_tour.getId() != piece.getJoueur().getId())
-        throw Stratego_Move_Exception("Cette pièce ne vous appartient pas!", "Erreur de sélection");
+    //Essai de déplacer une piece par nature statique
+    staticPiece(plateau, x1, y1);
 
-    type_m = piece.getType();
-    //Piece ne peut pas bouger
-    if(type_m == 0 || type_m == 11 )
-        throw Stratego_Move_Exception("Cette pièce est immobile de nature!", "Erreur de déplacement");
-    //On passe sur les 2 memes case pendant 5 coups
-    //if(!count_Dif_Pos_Ok(piece, c))
-    //    throw Stratego_Move_Exception(11);
-    
-    //distance de + d'une case interdit 
-    if(type_m != 2 && abs(x1-x2+y1-y2) != 1)
-        throw Stratego_Move_Exception("Cette pièce ne peut bouger que d'une case orthogonalement!", "Erreur de déplacement");
-    i = x2;
-    j = y2;
-    while(i != x1 || j != y1){
-        c = plateau.getCase(i, j);
-        //Case inutiliable
-        if(c.getCouleur() == 1)
-        {
-            throw Stratego_Move_Exception("Case inutilisable sur le chemin!", "Erreur de déplacement");
-        }
-        //Case d'arrivée occupée par piece du joueur actif
-        if(i == x2 && j == y2){
-            
-            if(not c.isEmpty())
-            {
-                piece = *c.getPiece();
-                
-                if(j_tour.getId() == piece.getJoueur().getId())
-                    {
-                        //cout << "C'est le tour du joueur numero " << j_tour.getId() << " qui attaque la piece apartenant au joueur " << piece.getJoueur().getId() <<   endl;
-                        
-                        
-                        throw Stratego_Move_Exception("Case déjà occupee par une de vos pieces!", "Erreur de déplacement");
-                    }
-            }
-        }
-            //Case intermediaire non-vide
-            if((not c.isEmpty()) && (not(i == x2 && j == y2)) && (not(i == x1 && j == y1)))
-                throw Stratego_Move_Exception("Case occupée sur le chemin!", "Erreur de déplacement");
-
-              
-            //incrémentation/décrémentation adaptée
-            if(i > x1)
-                i--;
-            else if(i < x1)
-                i++;
-            if(j > y1)
-                j--;
-            else if(j < y1)
-                j++;
+    if(plateau.getCase(x1, y1).getPiece()->getType() != 2)//pour toute piece autre que l'éclaireur...
+    {
+        //distance de + d'une case interdit.
+        checkMove1Box(x1, y1, x2, y2);
     }
+    
+    //chemin libre
+    checkPath(plateau, j_tour, x1, y1, x2, y2);
     return 0;
 };
 
@@ -149,9 +79,7 @@ void R_Stratego::move(Plateau &plateau, int x1, int y1, int x2, int y2){
     
     if(plateau.getCase(x2, y2).isEmpty())
     {
-        //cout<< "On passe ici!" << endl;
         plateau.move(x1, y1, x2, y2);
-        //recordMove(plateau, p1, x2, y2);
     }
     else
     {
@@ -250,9 +178,20 @@ bool R_Stratego::placePiece(Plateau &plateau, Piece &piece, int x, int y)
         
         return false;
     }
-    plateau.ajoutPiece(piece);
+    
     plateau.dispatch(&piece, x, y);
 
     
     return true;
+}
+
+
+void R_Stratego::staticPiece(Plateau &plateau, int x, int y)
+{
+    Case c = plateau.getCase(x, y);
+    Piece piece = *c.getPiece();
+    int type_m = piece.getType();
+    //Piece ne peut pas bouger
+    if(type_m == 0 || type_m == 11 )
+        throw Move_Exception("Cette pièce est immobile de nature!", "Erreur de déplacement");
 }

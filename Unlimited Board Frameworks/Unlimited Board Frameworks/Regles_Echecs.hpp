@@ -19,7 +19,7 @@ class Regles_Echecs : public Regles
     int checkMove(Plateau &p, int x1, int y1, int x2, int y2, Joueur j_tour);
     void move(Plateau &p, int x1, int y1, int x2, int y2);
     int etatPartie(Plateau &p);
-    bool placePiece(Plateau &p, Piece &piece, int x, int y);
+    bool placePiece(Plateau &plateau, Piece &piece, int x, int y);
 };
 
 #endif /* Regles_Echecs_hpp */

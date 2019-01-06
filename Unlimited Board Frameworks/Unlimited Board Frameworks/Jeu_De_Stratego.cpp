@@ -171,7 +171,7 @@ void Jeu_De_Stratego::start()
                 canPass = false;
             }
             
-            catch(Stratego_Move_Exception mE)
+            catch(Move_Exception mE)
             {
                 cerr << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
                 canPass = false;
@@ -275,7 +275,7 @@ void Jeu_De_Stratego::startTest()
                 canPass = false;
             }
             
-            catch(Stratego_Move_Exception mE)
+            catch(Move_Exception mE)
             {
                 cerr << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
                 canPass = false;

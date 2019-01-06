@@ -8,7 +8,7 @@
 
 #include "Jeu_Echecs.hpp"
 #include "Input_Taker.hpp"
-#include "Stratego_Move_Exception.hpp"
+#include "Move_Exception.hpp"
 
 Jeu_Echecs::Jeu_Echecs(Plateau_Echecs& p, Regles_Echecs& r, std::vector<Joueur>& v, Afficheur_Echecs& a) : Jeu(p, r, v, a)
 {
@@ -142,7 +142,7 @@ void Jeu_Echecs::start()
                 canPass = false;
             }
             
-            catch(Stratego_Move_Exception mE)
+            catch(Move_Exception mE)
             {
                 std::cerr << "ERREUR DE MOUVEMENT : " << mE.what() << std::endl;
                 canPass = false;

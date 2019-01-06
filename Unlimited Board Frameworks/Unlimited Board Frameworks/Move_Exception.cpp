@@ -1,4 +1,4 @@
-#include "Stratego_Move_Exception.hpp"
+#include "Move_Exception.hpp"
 
 
 //    switch(numero){
@@ -27,6 +27,6 @@
 //    }
 
 
-Stratego_Move_Exception::~Stratego_Move_Exception() throw ()
+Move_Exception::~Move_Exception() throw ()
 {}
 
