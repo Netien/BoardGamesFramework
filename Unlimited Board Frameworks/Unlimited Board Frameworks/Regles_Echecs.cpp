@@ -74,9 +74,6 @@ int Regles_Echecs::checkMove(Plateau& plateau, int x1, int y1, int x2, int y2, J
 
 void Regles_Echecs::move(Plateau& plateau, int x1, int y1, int x2, int y2)
 {
-    Piece p1 = plateau.getCase(x1, y1).getPiece();
-    int t1;
-    int t2;
     
     if(plateau.getCase(x2, y2).isEmpty())
     {
@@ -84,11 +81,11 @@ void Regles_Echecs::move(Plateau& plateau, int x1, int y1, int x2, int y2)
     }
     else
     {
-        Piece p2 = plateau.getCase(x2, y2).getPiece();
+        Piece p = plateau.getCase(x2, y2).getPiece();
         
-            plateau.discard(p2);
-            plateau.move(x1, y1, x2, y2);
-            //recordMove(plateau, p1, x2, y2);
+	plateau.discard(p);
+	plateau.move(x1, y1, x2, y2);
+	//recordMove(plateau, p1, x2, y2);
     }
 
 }
@@ -139,7 +136,7 @@ bool Regles_Echecs::placePiece(Plateau &plateau, Piece &piece, int x, int y)
 
 void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, int y1, int x2, int y2)
 {
-    Case c = plateau.getCase(x1, y1);
+    Case &c = plateau.getCase(x1, y1);
     
     //
     
@@ -150,9 +147,9 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, i
         
             c = plateau.getCase(x1, y1+1);
             if(not(c.isEmpty()))//Si la case est occupée, peut importe par quelle piece, il ne peut avancer(pion ne peut manger en avançant).
-               {
-                   throw Move_Exception("Case occupée, vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
-               }
+	    {
+		throw Move_Exception("Case occupée, vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
+	    }
         }
         else if(x2 == x1 and y2 == y1+2)//Si on essaye d'avancer de 2 cases tout droit
         {
@@ -171,7 +168,7 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, i
         else if(x2 == x1-1 and y2 == y1+1)//Si on essaye d'accéder à la case adjacente en diagonale gauche
         {
             c = plateau.getCase(x1-1, y1+1);
-            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            if(c.isEmpty() or c.getPiece().getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
             {
                 throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
             }
@@ -179,7 +176,7 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, i
         else if(x2 == x1+1 and y2 == y1+1)//Si on essaye d'accéder à la case adjacente en diagonale droite
         {
             c = plateau.getCase(x1+1, y1+1);
-            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            if(c.isEmpty() or c.getPiece().getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
             {
                 throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
             }
@@ -220,7 +217,7 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, i
         else if(x2 == x1-1 and y2 == y1-1)//Si on essaye d'accéder à la case adjacente en diagonale gauche
         {
             c = plateau.getCase(x1-1, y1-1);
-            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            if(c.isEmpty() or c.getPiece().getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
             {
                 throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
             }
@@ -228,7 +225,7 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur j_tour, int x1, i
         else if(x2 == x1+1 and y2 == y1-1)//Si on essaye d'accéder à la case adjacente en diagonale droite
         {
             c = plateau.getCase(x1+1, y1+1);
-            if(c.isEmpty() or c.getPiece()->getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
+            if(c.isEmpty() or c.getPiece().getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
             {
                 throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");
             }
