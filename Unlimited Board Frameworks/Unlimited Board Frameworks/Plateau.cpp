@@ -58,29 +58,35 @@ const unsigned long Plateau::getLongListePieces() const
 }
 
 void Plateau::move(int x1, int y1, int x2, int y2){
-    Piece *p = getCase(x1, y1).getPiece();
-    dispatch(p, x2, y2);
+    Piece &p = getCase(x1, y1).getPiece();
     discard(x1, y1);
+    dispatch(p, x2, y2);
 }
 
 void Plateau::discard(int x, int y){
-    getCase(x, y).setPiece(&Case::puit);
+    if(not getCase(x, y).isEmpty())
+	getCase(x, y).getPiece().move(-1,-1);
+    getCase(x, y).setPiece(Case::puit);
 }
 
-void Plateau::discard(Piece *p){
-    if(p->getX() != -1 && p->getY() != -1)
-        getCase(p->getX(), p->getY() ).setPiece(&Case::puit);
-    p->move(-1, -1);
+void Plateau::discard(Piece &p){
+    int x = p.getX();
+    int y = p.getY();
+	
+    if(x != -1 && y != -1)
+        getCase(x, y).setPiece(Case::puit);
+    p.move(-1, -1);
 }
 
-void Plateau::dispatch(Piece* p, int x, int y){
-    getCase(x, y).getPiece()->move(-1,-1);
+void Plateau::dispatch(Piece &p, int x, int y){
+    if(not getCase(x, y).isEmpty())
+	getCase(x, y).getPiece().move(-1,-1);
     getCase(x, y).setPiece(p);
-    p->move(x, y);
+    p.move(x, y);
 }
 
 void Plateau::ajoutPiece(Piece &piece){
-    for (Piece& p : m_listePieces)
+    for (Piece p : m_listePieces)
     {
         if(p.getId()==piece.getId())
         {

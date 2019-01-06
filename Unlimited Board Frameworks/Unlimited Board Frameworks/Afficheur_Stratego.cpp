@@ -36,9 +36,9 @@ void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
             }
             else
             {
-                Piece* p = c.getPiece();
-                int type = p->getType();
-                if (p->getJoueur().getId() != j.getId())
+                Piece p = c.getPiece();
+                int type = p.getType();
+                if (p.getJoueur().getId() != j.getId())
                 {
                     cout << " ? ";
                 }
@@ -88,7 +88,7 @@ void Afficheur_Stratego::affichageTotal(Plateau & p)
             }
             else
             {
-                int type = c.getPiece()->getType();
+                int type = c.getPiece().getType();
                 
                 if (type < 10)
                 {
