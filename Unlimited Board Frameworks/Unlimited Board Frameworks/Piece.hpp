@@ -28,11 +28,11 @@ public :
     
     Piece();
     Piece(int type, Joueur &j);
-    void promotion(int n_type);
+    void promotion(int n_type);//change le type du pion
     int getId();
     int getX();
     int getY();
-    Joueur getJoueur();
+    Joueur& getJoueur();
     int getType();
     void move(int x, int y);
 };

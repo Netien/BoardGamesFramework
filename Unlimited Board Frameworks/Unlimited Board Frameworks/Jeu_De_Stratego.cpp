@@ -162,7 +162,7 @@ void Jeu_De_Stratego::start()
                 if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
                 {
                     m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
-		    canPass = true;
+                    canPass = true;
                 }
 		//Debug
 		//cout << "Coup valide: " << canPass << endl;
@@ -277,7 +277,7 @@ void Jeu_De_Stratego::startTest()
                 if(m_regles.checkMove(m_plateau, valX1, valY1, valX2, valY2, currentPlayer) == 0)
                 {
                     m_regles.move(m_plateau, valX1, valY1, valX2, valY2);
-		    canPass = true;
+                    canPass = true;
                 }
                 
                 cptTour++;

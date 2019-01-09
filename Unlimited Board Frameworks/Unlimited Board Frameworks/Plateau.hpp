@@ -1,10 +1,7 @@
 //
 //  plateau.hpp
 //  Unlimited Board Frameworks
-//
-//  Created by Etienne Juan Gesta on 25/12/2018.
-//  Copyright © 2018 Etienne & Paul-Simon ®. All rights reserved.
-//
+
 
 #ifndef Plateau_hpp
 #define Plateau_hpp
@@ -28,7 +25,7 @@ public :
     Case& getCase(int x, int y);
     Piece& getPiece(int p_id);
     const unsigned long getLongListePieces() const;
-    bool contains(int x, int y); //Vérifie si case est dans le plateau
+    virtual bool contains(int x, int y); //Vérifie si case est dans le plateau
     void ajoutPiece(Piece& p);
     
     int getHauteur();

@@ -25,7 +25,7 @@ class Jeu_Echecs : public Jeu {
     
     public :
     Jeu_Echecs( Plateau_Echecs &p, Regles_Echecs &r, std::vector<Joueur> &v, Afficheur_Echecs &a);
-    void remplirListePieces() ;
-    void start();
-    void startTest();
+    virtual void remplirListePieces() ;
+    virtual void placerDansPlateau();
+    virtual void start();
 };

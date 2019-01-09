@@ -27,3 +27,36 @@ Plateau_Echecs::Plateau_Echecs(int l, int h) : Plateau(l, h)
 Plateau_Echecs::Plateau_Echecs() : Plateau_Echecs(8, 8)
 {
 }
+
+std::vector<int> Plateau_Echecs::getCoordKing(Joueur& j)//trouve les coordonnées du roi de j
+{
+    std::vector<int> vect(2);
+    
+    for(Piece& p : m_listePieces)
+    {
+        if(p.getType()==5 and p.getJoueur().getId() == j.getId())
+        {
+            vect[0] = p.getX();
+            vect[1] = p.getY();
+        }
+    }
+    
+    
+    return vect;
+    
+}
+
+Piece& Plateau_Echecs::getKing(Joueur& j)//trouve le roi de j
+{
+
+    for(Piece& p : m_listePieces)
+    {
+        if(p.getType()==5 and p.getJoueur().getId() == j.getId())
+        {
+            return p;
+        }
+    }
+    throw std::runtime_error("Roi non trouvé!");
+
+}
+

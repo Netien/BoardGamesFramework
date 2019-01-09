@@ -17,6 +17,7 @@ void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
     for(int y = p.getHauteur()-1; y >= 0; y--)
     {
         cout << endl;
+        cout << y+1 << "\t";
         
         for(int x = 0; x< p.getLargeur(); x++)
         {
@@ -58,6 +59,14 @@ void Afficheur_Stratego::affichagePartiel(Plateau & p, Joueur j)
             }
         }
     }
+    cout << endl;
+    cout << endl << "\t";
+    
+    for(int x = 0; x< p.getLargeur(); x++)
+    {
+        cout << (char)('a'+ x) << "\t";
+    }
+    
     cout << endl;
     cout << endl;
 }

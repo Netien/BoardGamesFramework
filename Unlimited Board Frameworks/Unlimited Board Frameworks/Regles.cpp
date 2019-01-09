@@ -50,6 +50,15 @@ void Regles::checkNonDiagonal(int x1, int y1, int x2, int y2)
     }
 }
 
+bool Regles::isDiagoOrthogonal(int x1, int y1, int x2, int y2)//Déplacement orthogonal ou diagonal
+{
+    if((x1 != x2 && y1 != y2) && (not (abs(x2-x1) == abs(y2-y1))))
+    {
+        return false;
+    }
+    return true;
+}
+
 void Regles::checkDiagoOrthogonal(int x1, int y1, int x2, int y2)//Déplacement orthogonal ou diagonal
 {
     if((x1 != x2 && y1 != y2) && (not (abs(x2-x1) == abs(y2-y1))))
@@ -116,13 +125,14 @@ void Regles::checkDistanceFromStartLessThanN(int n, int x1, int y1, int x2, int 
     }
 }
 
-void Regles::checkPath(Plateau& plateau, Joueur j_tour, int x1, int y1, int x2, int y2)
+void Regles::checkPath(Plateau& plateau, Joueur& j_tour, int x1, int y1, int x2, int y2)
 {
     Case c;
     Piece piece;
     int i = x2;
     int j = y2;
     while(i != x1 || j != y1){
+        //std::cout << "j'essayait d'acceder a la case " << i << " " << j << std::endl;
         c = plateau.getCase(i, j);
         //Case inutiliable
         if(c.getCouleur() == 1)
@@ -150,10 +160,10 @@ void Regles::checkPath(Plateau& plateau, Joueur j_tour, int x1, int y1, int x2, 
             throw Move_Exception("Case occupée sur le chemin!", "Erreur de déplacement");
             
             
-            //incrémentation/décrémentation adaptée
-            if(i > x1)
+        //incrémentation/décrémentation adaptée
+        if(i > x1)
                 i--;
-            else if(i < x1)
+        else if(i < x1)
                 i++;
         if(j > y1)
             j--;

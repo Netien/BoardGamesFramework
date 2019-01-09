@@ -9,27 +9,29 @@
 #include "Input_Taker.hpp"
 
 
-std::vector<std::string> Input_Taker::split(const std::string &text, char sep) {
-    std::vector<std::string> tokens;
-    std::size_t start = 0, end = 0;
-    while ((end = text.find(sep, start)) != std::string::npos) {
-        tokens.push_back(text.substr(start, end - start));
-        start = end + 1;
+std::vector<std::string> Input_Taker::split(std::string chaine, char delimiteur)
+{
+    std::vector<std::string> elements;
+    std::stringstream ss(chaine);
+    std::string sousChaine;
+    
+    while (getline(ss, sousChaine, delimiteur))
+    {
+        elements.push_back(sousChaine);
     }
-    tokens.push_back(text.substr(start));
-    return tokens;
-}//split(std::string chaine, char delimiteur)
-//{
-//    std::vector<std::string> elements;
-//    std::stringstream ss(chaine);
-//    std::string sousChaine;
-//    
-//    while (getline(ss, sousChaine, delimiteur))
-//    {
-//        elements.push_back(sousChaine);
+    return elements;
+}
+    
+//    std::vector<std::string> tokens;
+//    std::size_t start = 0, end = 0;
+//    while ((end = text.find(sep, start)) != std::string::npos) {
+//        tokens.push_back(text.substr(start, end - start));
+//        start = end + 1;
 //    }
-//    return elements;
+//    tokens.push_back(text.substr(start));
+//    return tokens;
 //}
+
 
 std::vector<std::string> Input_Taker::recupererPlacement()
 {
@@ -82,7 +84,6 @@ std::vector<std::string> Input_Taker::recupererMouvement()
     std::vector<std::string> res = Input_Taker::split(req, ' ');
     
     //std::cout << "res est de longueur " << res.size() << std::endl;
-    
     if (res.size()!=2)
     {
         throw Input_Exception("Deux mots demandés", "Erreur de format");
@@ -93,12 +94,15 @@ std::vector<std::string> Input_Taker::recupererMouvement()
     
     std::string mot2 = res[1];
     unsigned long l2 = mot2.size();
-        
-        
     if (l1<2 || l1>3)
     {
         throw Input_Exception("mot 1 de mauvaise longueur", "Erreur de format");
     }
+
+    
+        
+        
+    
     
     if (l2<2 || l2>3)
     {
@@ -111,7 +115,7 @@ std::vector<std::string> Input_Taker::recupererMouvement()
         throw Input_Exception("Premier caractere du premier mot doit etre une lettre", "Erreur de format");
     }
     
-    if (!isdigit((mot1[1])))
+    if (!isdigit(mot1[1]))
     {
         throw Input_Exception("Deuxieme caractere du premier mot doit etre un chiffre", "Erreur de format");
     }
@@ -145,6 +149,13 @@ std::vector<std::string> Input_Taker::recupererMouvement()
 
     return res;
 
+}
+
+std::string Input_Taker::recupererCommande()
+{
+    std::string s;
+    std::cin >> s;
+    return s;
 }
 
 

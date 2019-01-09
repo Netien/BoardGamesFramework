@@ -27,7 +27,7 @@ int Piece::getX(){ return m_coordX; }
 
 int Piece::getY(){ return m_coordY; }
 
-Joueur Piece::getJoueur(){ return *m_joueur; }
+Joueur& Piece::getJoueur(){ return *m_joueur; }
 
 int Piece::getType(){ return m_type; }
 

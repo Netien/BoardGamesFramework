@@ -17,6 +17,8 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
     {
         cout << endl;
         cout << endl;
+        cout << y+1 << "\t";
+        //cout << (char)('a'+ y) << "\t";
         
         for(int x = 0; x< p.getLargeur(); x++)
         {
@@ -43,74 +45,79 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout <<"\u2659\t" ;
+                        cout <<"\u265F\t" ;
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout <<"\u265F\t";
+                        cout <<"\u2659\t";
                     }
                 }
                 else if (type == 1)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << "\u2658\t";
+                        cout << "\u265E\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout <<"\u265E\t" ;
+                        cout <<"\u2658\t" ;
                     }
                 }
                 else if (type == 2)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout <<"\u2657\t";
+                        cout <<"\u265D\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout <<"\u265D\t";
+                        cout <<"\u2657\t";
                     }
                 }
                 else if (type == 3)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << "\u2656\t";
+                        cout << "\u265C\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << "\u265C\t";
+                        cout << "\u2656\t";
                     }
                 }
                 else if (type == 4)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout << "\u2655\t";
+                        cout << "\u265B\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout << "\u265B\t";
+                        cout << "\u2655\t";
                     }
                 }
                 else if (type == 5)
                 {
                     if(proprietaire.getId() == 0)
                     {
-                        cout <<"\u2654\t";
+                        cout <<"\u265A\t";
                     }
                     if(proprietaire.getId() == 1)
                     {
-                        cout <<"\u265A\t";
+                        cout <<"\u2654\t";
                     }
                 }
-
-
-                
             }
         }
     }
+    cout << endl;
+    cout << endl << "\t";
+    
+    for(int x = 0; x< p.getLargeur(); x++)
+    {
+        cout << (char)('a'+ x) << "\t";
+    }
+    
     cout << endl;
     cout << endl;
 }
@@ -120,9 +127,36 @@ void Afficheur_Echecs::affichagePartiel(Plateau & p, Joueur j)
     
 }
 
+
+
+void Afficheur_Echecs::demanderPromotion()
+{
+    cout << "Voulez vous transformer votre pion en Cavalier ou en Reine ? (C/R)" << endl;
+}
+
 void Afficheur_Echecs::affichageBienvenue()
 {
     cout << "Bienvenu au jeu d'echecs" << endl;
+}
+
+void Afficheur_Echecs::annoncerEchecs()
+{
+    cout << "vous êtes en échec !" << endl;
+}
+
+void Afficheur_Echecs::toujoursEnEchecs()
+{
+    cout << "vous êtes toujours en échec !" << endl;
+}
+
+void Afficheur_Echecs::vousMetEnEchec()
+{
+    cout << "Ce coup vous met en échec !" << endl;
+}
+
+void Afficheur_Echecs::annonceEchecEtMat(Joueur j)
+{
+    std::cout << "Vous êtes en échec et mat, " << j.getNom() <<", vous avez perdu !" << endl;
 }
 
 //void affichagePartiel(Plateau & p, Joueur j);

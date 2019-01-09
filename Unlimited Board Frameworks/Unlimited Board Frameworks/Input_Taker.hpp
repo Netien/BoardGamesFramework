@@ -24,7 +24,8 @@
 class Input_Taker
 {
 public :
-    static std::vector<std::string> split(const std::string &, char delimiteur);
+    static std::vector<std::string> split(std::string chaine, char delimiteur);
     static std::vector<std::string> recupererPlacement();
     static std::vector<std::string> recupererMouvement();
+    static std::string recupererCommande();
 };

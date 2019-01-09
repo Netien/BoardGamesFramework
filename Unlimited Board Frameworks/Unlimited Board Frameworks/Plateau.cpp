@@ -65,7 +65,7 @@ void Plateau::move(int x1, int y1, int x2, int y2){
 
 void Plateau::discard(int x, int y){
     if(not getCase(x, y).isEmpty())
-	getCase(x, y).getPiece().move(-1,-1);
+        getCase(x, y).getPiece().move(-1,-1);
     getCase(x, y).setPiece(Case::puit);
 }
 
@@ -74,13 +74,14 @@ void Plateau::discard(Piece &p){
     int y = p.getY();
 	
     if(x != -1 && y != -1)
-        getCase(x, y).setPiece(Case::puit);
-    p.move(-1, -1);
+        p.move(-1, -1);
+    getCase(x, y).setPiece(Case::puit);
+    
 }
 
 void Plateau::dispatch(Piece &p, int x, int y){
     if(not getCase(x, y).isEmpty())
-	getCase(x, y).getPiece().move(-1,-1);
+        getCase(x, y).getPiece().move(-1,-1);
     getCase(x, y).setPiece(p);
     p.move(x, y);
 }

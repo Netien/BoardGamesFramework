@@ -24,6 +24,11 @@ class Afficheur_Echecs : public Affichage
     //static void annoncerCombat(Piece & p1, Piece & p2);
     static void annoncerVictoire(Piece & p);
     static void annoncerMatchNul();
+    static void annoncerEchecs();
+    static void toujoursEnEchecs();
+    static void vousMetEnEchec();
+    static void annonceEchecEtMat(Joueur j);
+    static void demanderPromotion();
 };
 
 
