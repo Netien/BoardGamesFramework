@@ -73,6 +73,7 @@ void Jeu_De_Stratego::start()
     
     m_affichage.affichageTotal(m_plateau);
     
+    Input_Taker iT;
     
     vector<std::string> res;
     
@@ -91,7 +92,7 @@ void Jeu_De_Stratego::start()
             
             
             try{
-                res = Input_Taker::recupererPlacement();
+                res = iT.recupererPlacement();
                 
                 char c = res[0][0];
                 
@@ -148,7 +149,7 @@ void Jeu_De_Stratego::start()
                 m_affichage.affichagePartiel(m_plateau, currentPlayer);
                 cout << "Joueur courant :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
                 m_affichage.demanderMouvement(currentPlayer);
-                std::vector<string> res = Input_Taker::recupererMouvement();
+                std::vector<string> res = iT.recupererMouvement();
                 
                 char c1 = res[0][0];
                 int valX1 = c1 - 'a';
@@ -184,11 +185,19 @@ void Jeu_De_Stratego::start()
 		//cout << "Coup valide: " << canPass << endl;
 		
             }
+            catch(Quit_Exception qE)
+            {
+                std::cout << "Vous quittez la partie" << std::endl;
+                etat=-1;
+                break;
+            }
 		
         }
-	etat = m_regles.etatPartie(m_plateau);
-	//Debug
-	//cout << "Etat de la partie: " << etat << endl;
+    
+        if(etat!= -1)
+        {
+            etat = m_regles.etatPartie(m_plateau);
+        }
         
     }
     
@@ -208,6 +217,7 @@ void Jeu_De_Stratego::startTest()
     
     int i = 0;
     
+    Input_Taker iT;
     
     int ind;
     int j;
@@ -263,7 +273,7 @@ void Jeu_De_Stratego::startTest()
                 currentPlayer = m_listJoueurs[cptTour%2];
                 //cout << "Joueur courent :" << currentPlayer.getNom() << " d'id " << currentPlayer.getId() << endl;
                 m_affichage.demanderMouvement(currentPlayer);
-                std::vector<string> res = Input_Taker::recupererMouvement();
+                std::vector<string> res = iT.recupererMouvement();
                 
                 char c1 = res[0][0];
                 int valX1 = c1 - 'a';
@@ -292,6 +302,11 @@ void Jeu_De_Stratego::startTest()
             {
                 cerr << "ERREUR DE MOUVEMENT : " << mE.what() << endl;
                 canPass = false;
+            }
+            catch(Quit_Exception qE)
+            {
+                std::cout << "Vous quittez la partie" << std::endl;
+                
             }
         }
         

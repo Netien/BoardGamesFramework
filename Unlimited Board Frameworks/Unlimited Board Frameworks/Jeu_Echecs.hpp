@@ -8,13 +8,17 @@
 
 #ifndef Jeu_Echecs_hpp
 #define Jeu_Echecs_hpp
-
+#include <stdlib.h> 
 #include <stdio.h>
 #include "Jeu.hpp"
 #include "Regles_Echecs.hpp"
 #include "Afficheur_Echecs.hpp"
 #include "Plateau_Echecs.hpp"
-
+#include "Input_Taker.hpp"
+#include "Chess_Robot_Input_Taker.hpp"
+#include "Move_Exception.hpp"
+#include "Quit_Exception.hpp"
+#include "FileIO.hpp"
 
 #endif /* Jeu_Echecs_hpp */
 

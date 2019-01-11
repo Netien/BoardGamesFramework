@@ -8,14 +8,20 @@
 
 #include "Affichage.hpp"
 
+
+
+void Affichage::demanderChargement()
+{
+    std::cout << "Voulez vous charger la derniere partie ? (Y/N)" << std::endl;
+}
 void Affichage::demanderMouvement()
 {
-    std::cout << "Quel déplacement voulez vous faire ?, (format \"a1 b2\")" << std::endl;
+    std::cout << "Quel déplacement voulez vous faire ?, (format \"a1 b2\", quit pour quitter)" << std::endl;
 }
 
 void Affichage::demanderMouvement(Joueur& j)
 {
-    std::cout << "Quel déplacement voulez vous faire, " << j.getNom() << "? (format \"a1 b2\")" << std::endl;
+    std::cout << "Quel déplacement voulez vous faire, " << j.getNom() << "? (format \"a1 b2\", quit pour quitter)" << std::endl;
 }
 
 void Affichage::demanderPlacement()

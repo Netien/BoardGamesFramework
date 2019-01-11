@@ -23,6 +23,7 @@ class Affichage
     virtual void demanderMouvement(Joueur& j);
     virtual void demanderPlacement();
     virtual void demanderPlacement(Piece& p);
+    void demanderChargement();
     
 };
 

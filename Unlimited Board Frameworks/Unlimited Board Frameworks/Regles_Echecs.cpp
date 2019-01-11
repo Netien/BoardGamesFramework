@@ -233,7 +233,7 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur& j_tour, int x1, 
         
         else if(x2 == x1-1 and y2 == y1-1)//Si on essaye d'accéder à la case adjacente en diagonale gauche
         {
-            if (plateau.contains(x1-1, x1-1))
+            if (plateau.contains(x1-1, y1-1))
             {
                 c = plateau.getCase(x1-1, y1-1);
                 if(c.isEmpty() or c.getPiece().getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
@@ -244,9 +244,9 @@ void Regles_Echecs::checkPawnMovement(Plateau& plateau, Joueur& j_tour, int x1, 
         }
         else if(x2 == x1+1 and y2 == y1-1)//Si on essaye d'accéder à la case adjacente en diagonale droite
         {
-            if (plateau.contains(x1+1, x1+1))
+            if (plateau.contains(x1+1, y1-1))
             {
-                c = plateau.getCase(x1+1, y1+1);
+                c = plateau.getCase(x1+1, y1-1);
                 if(c.isEmpty() or c.getPiece().getJoueur().getId()==j_tour.getId())//si la case est vide ou avec une piece a nous: impossible.
                 {
                     throw Move_Exception("Vous ne pouvez aller sur cette case avec ce pion", "Erreur de déplacement");

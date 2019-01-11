@@ -25,7 +25,7 @@ private :
     static int id;
     
 public :
-    
+    static Piece puit;
     Piece();
     Piece(int type, Joueur &j);
     void promotion(int n_type);//change le type du pion

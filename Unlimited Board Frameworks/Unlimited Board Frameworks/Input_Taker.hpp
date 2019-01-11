@@ -18,14 +18,18 @@
 #include <cctype>
 
 #include "Input_Exception.hpp"
+#include "Quit_Exception.hpp"
 
-#endif /* Input_Taker_hpp */
+
 
 class Input_Taker
 {
 public :
-    static std::vector<std::string> split(std::string chaine, char delimiteur);
-    static std::vector<std::string> recupererPlacement();
-    static std::vector<std::string> recupererMouvement();
-    static std::string recupererCommande();
+    virtual std::vector<std::string> split(std::string chaine, char delimiteur);
+    virtual std::vector<std::string> recupererPlacement();
+    virtual std::vector<std::string> recupererMouvement(std::istream& stream=std::cin);
+    virtual std::string recupererCommande(std::istream& stream=std::cin);
+
 };
+
+#endif /* Input_Taker_hpp */

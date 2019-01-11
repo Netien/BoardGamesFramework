@@ -9,15 +9,15 @@
 #include "Case.hpp"
 #include "Plateau.hpp"
 
-Piece Case::puit = Piece();
 
-Case::Case() : m_piece(&(Case::puit)), m_coordX(-1), m_coordY(-1), m_couleur(0)
+
+Case::Case() : m_piece(&(Piece::puit)), m_coordX(-1), m_coordY(-1), m_couleur(0)
 {}
 
-Case::Case(int coordX, int coordY) : m_piece(&(Case::puit)), m_coordX(coordX), m_coordY(coordY), m_couleur(0)
+Case::Case(int coordX, int coordY) : m_piece(&(Piece::puit)), m_coordX(coordX), m_coordY(coordY), m_couleur(0)
 {}
 
-Case::Case(int coordX, int coordY, int couleur) : m_piece(&Case::puit), m_coordX(coordX), m_coordY(coordY), m_couleur(couleur)
+Case::Case(int coordX, int coordY, int couleur) : m_piece(&Piece::puit), m_coordX(coordX), m_coordY(coordY), m_couleur(couleur)
 {}
 
 Piece& Case::getPiece() { return *(m_piece); }
@@ -40,7 +40,7 @@ void Case::setCouleur(int coul) {
 
 void Case::setCoord(int x, int y) { m_coordX = x; m_coordY = y; }
 
-bool Case::isEmpty() { return m_piece == &Case::puit; }
+bool Case::isEmpty() { return m_piece == &Piece::puit; }
 
 bool Case::operator==(const Case &c){
     bool eq = this->m_coordX == c.m_coordX;
