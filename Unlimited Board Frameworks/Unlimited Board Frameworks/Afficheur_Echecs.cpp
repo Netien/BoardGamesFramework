@@ -107,6 +107,17 @@ void Afficheur_Echecs::affichageTotal(Plateau & p)
                         cout <<"\u2654\t";
                     }
                 }
+                else if (type == 6)
+                {
+                    if(proprietaire.getId() == 0)
+                    {
+                        cout <<"\u26c2\t";
+                    }
+                    if(proprietaire.getId() == 1)
+                    {
+                        cout <<"\u26c0\t";
+                    }
+                }
             }
         }
     }

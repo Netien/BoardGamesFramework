@@ -100,6 +100,8 @@ void Regles::checkMove1Box(int x1, int y1, int x2, int y2)
     }
 }
 
+
+
 void Regles::checkUpward(int x1, int y1, int x2, int y2)
 {
     if(not (y2-y1>0))
@@ -120,6 +122,14 @@ void Regles::checkDownward(int x1, int y1, int x2, int y2)
 void Regles::checkDistanceFromStartLessThanN(int n, int x1, int y1, int x2, int y2)
 {
     if(abs(x1-x2)>n || abs(y1-y2)>n)
+    {
+        throw Move_Exception("Cette pièce n'a pas le droit d'aller aussi loin!", "Erreur de déplacement");
+    }
+}
+
+void Regles::checkDistanceFromStartExactlyN(int n, int x1, int y1, int x2, int y2)
+{
+    if((abs(x1-x2) != n || abs(y1-y2) != n))
     {
         throw Move_Exception("Cette pièce n'a pas le droit d'aller aussi loin!", "Erreur de déplacement");
     }

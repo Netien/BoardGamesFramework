@@ -20,16 +20,18 @@
 #include "Quit_Exception.hpp"
 #include "FileIO.hpp"
 
-#endif /* Jeu_Echecs_hpp */
+
 
 class Jeu_Echecs : public Jeu {
     
-    private :
-    
     
     public :
+    Jeu_Echecs();
+
     Jeu_Echecs( Plateau_Echecs &p, Regles_Echecs &r, std::vector<Joueur> &v, Afficheur_Echecs &a);
     virtual void remplirListePieces() ;
     virtual void placerDansPlateau();
     virtual void start();
 };
+
+#endif /* Jeu_Echecs_hpp */

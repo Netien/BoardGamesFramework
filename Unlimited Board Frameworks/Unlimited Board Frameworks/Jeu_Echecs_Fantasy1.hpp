@@ -11,10 +11,15 @@
 
 #include <stdio.h>
 #include "Jeu_Echecs.hpp"
+#include "Plateau_Echecs_Fantasy.hpp"
+#include "Regles_Echecs_Fantasy.hpp"
 
-class Jeu_Echecs_Fantasy1 : Jeu_Echecs
+
+class Jeu_Echecs_Fantasy1 : public Jeu_Echecs
 {
-    
+public:
+    Jeu_Echecs_Fantasy1( Plateau_Echecs_Fantasy &p, Regles_Echecs_Fantasy &r, std::vector<Joueur> &v, Afficheur_Echecs &a);
+    void start();
     void remplirListePieces();
     
 };

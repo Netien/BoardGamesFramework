@@ -18,7 +18,9 @@
 #include "R_Stratego.hpp"
 #include "Afficheur_Stratego.hpp"
 #include "Jeu_De_Stratego.hpp"
-
+#include "Plateau_Echecs_Fantasy.hpp"
+#include "Regles_Echecs_Fantasy.hpp"
+#include "Jeu_Echecs_Fantasy1.hpp"
 using namespace std;
 
 int main(int argc, const char * argv[]) {
@@ -27,8 +29,8 @@ int main(int argc, const char * argv[]) {
 //    vector<Joueur> l_j{};
 //    Afficheur_Stratego afS;
 //    
-//    Joueur b = Joueur("Bob");
-//    Joueur v = Joueur("Alice");
+//    Joueur b = Joueur("Joueur 1");
+//    Joueur v = Joueur("Joueur 2");
 //    cout << b.getId() << endl;
 //    cout << v.getId() << endl;
 //    l_j.push_back(b);
@@ -44,15 +46,28 @@ int main(int argc, const char * argv[]) {
     vector<Joueur> l_j{};
     Afficheur_Echecs afS;
     
-    Joueur b = Joueur("Bob");
-    Joueur v = Joueur("Alice");
-    cout << b.getId() << endl;
-    cout << v.getId() << endl;
+    Joueur b = Joueur("Joueur 1");
+    Joueur v = Joueur("Joueur 2");
     l_j.push_back(b);
     l_j.push_back(v);
     
     Jeu_Echecs j{p, r, l_j, afS};
     j.start();
+    
+//    Plateau_Echecs_Fantasy p{};
+//    Regles_Echecs_Fantasy r{};
+//    vector<Joueur> l_j{};
+//    Afficheur_Echecs afS;
+//    
+//    Joueur b = Joueur("Joueur 1");
+//    Joueur v = Joueur("Joueur 2");
+//    l_j.push_back(b);
+//    l_j.push_back(v);
+//    
+//    Jeu_Echecs_Fantasy1 j{p, r, l_j, afS};
+//    j.start();
+//    
+//    
     
     return 0;
 

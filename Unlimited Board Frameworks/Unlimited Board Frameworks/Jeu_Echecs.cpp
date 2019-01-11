@@ -13,12 +13,9 @@ Jeu_Echecs::Jeu_Echecs(Plateau_Echecs& p, Regles_Echecs& r, std::vector<Joueur>&
 {
     if (v.size()!=2)
         throw std::runtime_error("seul 2 joueurs possibles pour ce jeu");
-    
-    //On met les pieces dans le plateau
-    remplirListePieces();
-    //On place les pieces dans le plateau
-    placerDansPlateau();
+
 }
+
 
 
 
@@ -71,7 +68,7 @@ void Jeu_Echecs::placerDansPlateau()
     {
         for ( x = 0; x < m_plateau.getLargeur(); x ++)
         {
-            
+            //std::cout <<  "on essaye de placer la" << i << "eme piece de type" << m_plateau.getPiece(i).getType() << " dans la case " << x << y << std::endl;
             m_regles.placePiece(m_plateau, m_plateau.getPiece(i), x, y);
             i++;
             
@@ -82,7 +79,7 @@ void Jeu_Echecs::placerDansPlateau()
     {
         for ( x = 0; x <  m_plateau.getLargeur(); x ++)
         {
-            
+            std::cout <<  "on essaye de placer la" << i << "eme piece de type" << m_plateau.getPiece(i).getType() << " dans la case " << x << y << std::endl;
             m_regles.placePiece(m_plateau, m_plateau.getPiece(i), x, y);
             i++;
             
@@ -93,12 +90,16 @@ void Jeu_Echecs::placerDansPlateau()
 
 void Jeu_Echecs::start()
 {
+    //On met les pieces dans le plateau
+    remplirListePieces();
+    //On place les pieces dans le plateau
+    placerDansPlateau();
     
     m_affichage.affichageBienvenue();
     bool loadMode = false;
     
-    //Input_Taker iT;
-    Chess_Robot_Input_Taker iT;
+    Input_Taker iT;
+    //Chess_Robot_Input_Taker iT;
     FileIO fIO("chessSaves.txt");
     std::vector<std::string> res;
     std::ifstream fichier;
@@ -171,7 +172,7 @@ void Jeu_Echecs::start()
                 Piece& p = Piece::puit;
             
                 
-                if(pRE->isChecked(currentPlayer, *pPE, p))//On regarde si le joueur est en çhec et on met p a la piece qui le met en échec si c'est le cas.
+                if(pRE->isChecked(currentPlayer, *pPE, p))//On regarde si le joueur est en echec et on met p a la piece qui le met en échec si c'est le cas.
                 {
                     if(pRE->isCheckmated(currentPlayer, *pPE, p))
                     {
